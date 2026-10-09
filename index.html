@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FUJIMOTO ARCHIVE — Semua Karya Tatsuki Fujimoto</title>
   <meta name="description" content="Arsip fan semua karya Tatsuki Fujimoto: Chainsaw Man, Fire Punch, Look Back, Goodbye Eri, dan one-shot awal. Tiap karya punya blognya sendiri.">
-  <meta name="theme-color" content="#0b0b0b">
+  <meta name="theme-color" content="#000000">
   <meta property="og:type" content="website">
   <meta property="og:title" content="FUJIMOTO ARCHIVE — Track record Tatsuki Fujimoto">
   <meta property="og:description" content="Dari one-shot usia 17 sampai Chainsaw Man. Semua karya Fujimoto dalam satu arsip.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,450;9..40,500;9..40,600&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Lewati ke konten</a>
@@ -38,19 +38,21 @@
 
   <main id="main">
     <section class="hero">
+      <div class="hero__light" aria-hidden="true"></div>
       <div class="hero__inner">
-        <p class="eyebrow" data-i18n="hero.eyebrow">Arsip fan · 2011 — 2026</p>
-        <h1 class="hero__title">TATSUKI<br>FUJIMOTO</h1>
+        <p class="label" data-i18n="hero.eyebrow">Arsip fan · 2011 — 2026</p>
+        <h1 class="hero__title">Tatsuki Fujimoto</h1>
         <p class="hero__jp" lang="ja">藤本タツキ</p>
         <p class="hero__dek" data-i18n="hero.dek">Semua karya, dari one-shot lomba di usia 17 sampai Chainsaw Man. Pilih satu karya untuk masuk ke blognya sendiri.</p>
-        <dl class="stats" id="stats"></dl>
+        <a class="btn btn--ghost" href="#works" data-i18n="hero.cta">Lihat semua karya ↓</a>
       </div>
+      <dl class="stats" id="stats"></dl>
     </section>
 
     <section class="section" id="profile">
       <div class="container profile">
         <div>
-          <p class="eyebrow" data-i18n="profile.eyebrow">Profil mangaka</p>
+          <p class="label" data-i18n="profile.eyebrow">Profil mangaka</p>
           <h2 class="h2" data-i18n="profile.title">Siapa Fujimoto?</h2>
           <p class="lede" id="bio"></p>
         </div>
@@ -62,7 +64,7 @@
       <div class="container">
         <div class="section__head">
           <div>
-            <p class="eyebrow" data-i18n="works.eyebrow">Karya</p>
+            <p class="label" data-i18n="works.eyebrow">Karya</p>
             <h2 class="h2" data-i18n="works.title">Pilih karya, masuk ke blognya</h2>
           </div>
           <div class="chips" role="group" aria-label="Filter" id="filters"></div>
@@ -71,17 +73,17 @@
       </div>
     </section>
 
-    <section class="section section--ink" id="timeline">
+    <section class="section section--credits" id="timeline">
       <div class="container">
-        <p class="eyebrow" data-i18n="timeline.eyebrow">Track record</p>
+        <p class="label" data-i18n="timeline.eyebrow">Track record</p>
         <h2 class="h2" data-i18n="timeline.title">Linimasa karier</h2>
         <ol class="timeline" id="timeline-list"></ol>
       </div>
     </section>
 
-    <section class="section" id="adaptations">
+    <section class="section section--light" id="adaptations">
       <div class="container">
-        <p class="eyebrow" data-i18n="adapt.eyebrow">Layar</p>
+        <p class="label" data-i18n="adapt.eyebrow">Layar</p>
         <h2 class="h2" data-i18n="adapt.title">Adaptasi anime &amp; film</h2>
         <ul class="rows" id="adapt-list"></ul>
       </div>
@@ -89,7 +91,7 @@
 
     <section class="section" id="awards">
       <div class="container">
-        <p class="eyebrow" data-i18n="awards.eyebrow">Pengakuan</p>
+        <p class="label" data-i18n="awards.eyebrow">Pengakuan</p>
         <h2 class="h2" data-i18n="awards.title">Penghargaan</h2>
         <ul class="rows" id="award-list"></ul>
       </div>
@@ -104,7 +106,7 @@
     </div>
   </footer>
 
-  <script src="js/works.js?v=1"></script>
-  <script src="js/app.js?v=1"></script>
+  <script src="js/works.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
 </body>
 </html>

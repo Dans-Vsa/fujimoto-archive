@@ -7,6 +7,7 @@
       "nav.adaptations": "Adaptasi", "nav.awards": "Penghargaan", "nav.back": "← Semua karya",
       "hero.eyebrow": "Arsip fan · 2011 — 2026",
       "hero.dek": "Semua karya, dari one-shot lomba di usia 17 sampai Chainsaw Man. Pilih satu karya untuk masuk ke blognya sendiri.",
+      "hero.cta": "Lihat semua karya ↓",
       "profile.eyebrow": "Profil mangaka", "profile.title": "Siapa Fujimoto?",
       "works.eyebrow": "Karya", "works.title": "Pilih karya, masuk ke blognya",
       "timeline.eyebrow": "Track record", "timeline.title": "Linimasa karier",
@@ -31,6 +32,7 @@
       "nav.adaptations": "Adaptations", "nav.awards": "Awards", "nav.back": "← All works",
       "hero.eyebrow": "Fan archive · 2011 — 2026",
       "hero.dek": "Every work, from a contest one-shot at 17 to Chainsaw Man. Pick one to step into its own blog.",
+      "hero.cta": "See all works ↓",
       "profile.eyebrow": "Mangaka profile", "profile.title": "Who is Fujimoto?",
       "works.eyebrow": "Works", "works.title": "Pick a work, enter its blog",
       "timeline.eyebrow": "Track record", "timeline.title": "Career timeline",
@@ -64,7 +66,8 @@
   const fmtDate = (d) => d.length === 4 ? d : new Date(d + "T00:00:00").toLocaleDateString(lang === "id" ? "id-ID" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
 
   function cover(w, big) {
-    return `<div class="cover${big ? " cover--big" : ""}" style="--work:${w.accent}" aria-hidden="true">
+    return `<div class="cover${big ? " cover--big" : ""}${w.img ? " cover--img" : ""}" style="--work:${w.accent}" aria-hidden="true">
+      ${w.img ? `<img src="${w.img}" alt="" loading="lazy">` : ""}
       <span class="cover__year">${years(w)}</span>
       <span class="cover__title">${esc(w.title)}</span>
       <span class="cover__jp" lang="ja">${esc(w.jp)}</span>
@@ -154,7 +157,7 @@
         <div class="container detail__grid">
           ${cover(w, true)}
           <div>
-            <p class="eyebrow eyebrow--work">${t("type")[w.type]}</p>
+            <p class="label">${t("type")[w.type]}</p>
             <h1 class="detail__title">${esc(w.title)}</h1>
             <p class="hero__jp" lang="ja">${esc(w.jp)}</p>
             <p class="lede">${esc(L(w.tagline))}</p>

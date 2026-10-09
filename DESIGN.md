@@ -1,517 +1,265 @@
 # DESIGN.md — Fujimoto Archive (hub of Tatsuki Fujimoto's works)
 
-Base system: **Wired** (from design-md-library), same family as the Chainsaw Man blog
-(`csm-devlog`) so the hub and every per-work blog feel like one magazine group.
-These adaptations OVERRIDE the Wired spec below where they conflict:
+Base system: **Runway** (from design-md-library) — cinematic, dark, the interface retreats so the
+"film posters" (work covers) carry all the color. Replaced the earlier Wired/manga-paper theme on 2026-10-09.
+These adaptations OVERRIDE the Runway spec below where they conflict:
 
 ## Project adaptations
-- **Canvas** manga paper `#f4f0e6`, `canvas-soft` `#ebe5d6`, hairline `#d6cebd`, ink `#0b0b0b`.
-- **Hub accent is ink itself** — the hub stays monochrome. Each *work* owns one chromatic accent
-  (`--work`), used only on its own card/detail page (spine bar, eyebrow, hover offset shadow):
-  CSM `#c8102e` · Fire Punch `#e0521b` · Look Back `#2a5dab` · Goodbye, Eri `#4f7a72` ·
-  one-shots `#6b665c` · collection `#8a6d1f`.
-- Fonts: **Anton** display, **Lora** body serif, **Inter** meta/sans.
-- Covers are typographic (no artwork): halftone dot field + title in Anton + Japanese title.
-- Radius 0 everywhere (pills only for filter chips). No blur shadows; the only shadow is the flat
-  hover offset in the work's accent.
-- Each work card has a **blog status**: `live` (links to that work's own blog, external) or `soon`.
+- **Font:** DM Sans for everything (abcNormal substitute), weights 400–600 only. Japanese titles: Noto Sans JP 500.
+- **Canvas** `#000000`, surfaces `#0b0b0c` / `#1a1a1a`, border `#27272a`, text `#ffffff`,
+  secondary `#767d88`, tertiary `#a7a7a7`. One light section (adaptations) on Cool Cloud `#e9ecf2`.
+- **Posters replace photography.** We have no licensed artwork, so each work's cover is a generated
+  "film still": dark radial light in the work's own color (`--work`), film grain, letterbox bars,
+  title set like a movie title card. Work colors live ONLY inside posters (never on UI chrome).
+  Exception: Chainsaw Man's poster uses the hero art from the user's own CSM blog.
+- **Timeline = end credits:** centered two-column credits roll (year · title).
+- Radius 4px (buttons) / 8px (containers); posters are square-cornered letterboxed frames. Zero shadows. No pills — filters are uppercase
+  text tabs with a 1px underline.
+- Each work card has a **blog status**: `live` (white button → that work's own blog) or `soon`.
 
 ---
 
----
-version: alpha
-name: Wired-Inspired-design-analysis
-description: An inspired interpretation of Wired's design language — a flagship technology-magazine brand whose surface is a strict editorial duet of stark black wordmark on white canvas, anchored by a tall narrow custom display serif for hero headlines, a humanist serif body face for long-form reading, and a clean sans face for metadata; layout reads like a printed magazine ported to the web with very little marketing chrome.
+# Design System Inspired by Runway
 
-colors:
-  primary: "#000000"
-  on-primary: "#ffffff"
-  ink: "#000000"
-  ink-soft: "#1a1a1a"
-  body: "#757575"
-  hairline: "#e0e0e0"
-  canvas: "#ffffff"
-  canvas-soft: "#f5f5f5"
-  link: "#057dbc"
+## 1. Visual Theme & Atmosphere
 
-typography:
-  display-hero:
-    fontFamily: WiredDisplay, "Times New Roman", Georgia, serif
-    fontSize: 64px
-    fontWeight: 400
-    lineHeight: 59.52px
-    letterSpacing: -0.5px
-  display-lg:
-    fontFamily: WiredDisplay, "Times New Roman", Georgia, serif
-    fontSize: 48px
-    fontWeight: 400
-    lineHeight: 50.4px
-    letterSpacing: -0.4px
-  display-md:
-    fontFamily: WiredDisplay, "Times New Roman", Georgia, serif
-    fontSize: 32px
-    fontWeight: 400
-    lineHeight: 35.2px
-    letterSpacing: -0.3px
-  display-sm:
-    fontFamily: WiredDisplay, "Times New Roman", Georgia, serif
-    fontSize: 26px
-    fontWeight: 400
-    lineHeight: 28.08px
-  display-xs:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 20px
-    fontWeight: 700
-    lineHeight: 24px
-    letterSpacing: -0.28px
-  body-serif-lg:
-    fontFamily: BreveText, Georgia, "Times New Roman", serif
-    fontSize: 19px
-    fontWeight: 400
-    lineHeight: 27.93px
-    letterSpacing: 0.108px
-  body-serif-md:
-    fontFamily: BreveText, Georgia, "Times New Roman", serif
-    fontSize: 16px
-    fontWeight: 400
-    lineHeight: 24px
-    letterSpacing: 0.09px
-  body-md:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 17px
-    fontWeight: 400
-    lineHeight: 20px
-  body-md-strong:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 17px
-    fontWeight: 700
-    lineHeight: 22px
-    letterSpacing: -0.144px
-  body-sm:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 18px
-    letterSpacing: 0.4px
-  body-sm-strong:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 14px
-    fontWeight: 700
-    lineHeight: 18px
-    letterSpacing: 0.4px
-  byline:
-    fontFamily: BreveText, Georgia, "Times New Roman", serif
-    fontSize: 12.73px
-    fontWeight: 700
-    lineHeight: 28px
-    letterSpacing: 0.108px
-  caption:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 12px
-    fontWeight: 400
-    lineHeight: 16px
-  button-md:
-    fontFamily: Apercu, "Helvetica Neue", Helvetica, Arial, sans-serif
-    fontSize: 16px
-    fontWeight: 700
-    lineHeight: 20px
-    letterSpacing: 0.3px
+Runway's interface is a cinematic reel brought to life as a website — a dark, editorial, film-production-grade design where full-bleed photography and video ARE the primary UI elements. This is not a typical tech product page; it's a visual manifesto for AI-powered creativity. Every section feels like a frame from a film: dramatic lighting, sweeping landscapes, and intimate human moments captured in high-quality imagery that dominates the viewport.
 
-rounded:
-  none: 0px
-  full: 9999px
+The design language is built on a single typeface — abcNormal — a clean, geometric sans-serif that handles everything from 48px display headlines to 11px uppercase labels. This single-font commitment creates an extreme typographic uniformity that lets the visual content speak louder than the text. Headlines use tight line-heights (1.0) with negative letter-spacing (-0.9px to -1.2px), creating compressed text blocks that feel like film titles rather than marketing copy.
 
-spacing:
-  xxs: 2px
-  xs: 4px
-  sm: 8px
-  md: 12px
-  lg: 16px
-  xl: 20px
-  2xl: 24px
-  3xl: 32px
-  4xl: 48px
-
-components:
-  nav-bar:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-sm-strong}"
-    padding: "{spacing.md} {spacing.xl}"
-  nav-link:
-    textColor: "{colors.ink}"
-    typography: "{typography.body-sm-strong}"
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.md} {spacing.xl}"
-  button-outline:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    borderColor: "{colors.ink}"
-    typography: "{typography.button-md}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.md} {spacing.xl}"
-  button-icon-circular:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.full}"
-    padding: "{spacing.sm}"
-  text-input:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    borderColor: "{colors.ink}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.md} {spacing.lg}"
-  story-card-large:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.display-md}"
-    padding: "{spacing.lg}"
-  story-card:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.display-xs}"
-    padding: "{spacing.md}"
-  story-row:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    borderColor: "{colors.hairline}"
-    typography: "{typography.body-md-strong}"
-    padding: "{spacing.lg} 0"
-  category-eyebrow:
-    textColor: "{colors.ink}"
-    typography: "{typography.body-sm-strong}"
-  byline-row:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.body}"
-    typography: "{typography.byline}"
-  hero-band:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.display-hero}"
-    padding: "{spacing.4xl} {spacing.xl}"
-  masthead-band:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body-md-strong}"
-    padding: "{spacing.md} {spacing.xl}"
-  hairline-divider:
-    borderColor: "{colors.hairline}"
-  footer:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.body-sm}"
-    padding: "{spacing.4xl} {spacing.xl}"
-
-  # ─── Examples (illustrative) — auto-derived; resolve any TO_FILL markers below ───
-  ex-pricing-tier:
-    description: "Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface."
-    backgroundColor: "{colors.canvas-soft}"
-    textColor: "{colors.ink}"
-    borderColor: "{colors.hairline}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.lg}"
-  ex-pricing-tier-featured:
-    description: "Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode)."
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.on-primary}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.lg}"
-  ex-product-selector:
-    description: "What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery)."
-    backgroundColor: "{colors.canvas-soft}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.lg}"
-  ex-cart-drawer:
-    description: "Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart)."
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.lg}"
-    item-divider: "{colors.hairline}"
-  ex-app-shell-row:
-    description: "Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator."
-    backgroundColor: "{colors.canvas}"
-    activeIndicator: "{colors.primary}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.md} {spacing.lg}"
-  ex-data-table-cell:
-    description: "Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm."
-    headerBackground: "{colors.canvas-soft}"
-    headerTypography: "{typography.caption}"
-    bodyTypography: "{typography.body-sm}"
-    cellPadding: "{spacing.md} {spacing.lg}"
-    rowBorder: "{colors.hairline}"
-  ex-auth-form-card:
-    description: "Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside."
-    backgroundColor: "{colors.canvas-soft}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.lg}"
-  ex-modal-card:
-    description: "Modal dialog surface — same chrome as feature-card with elevated shadow."
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.lg}"
-  ex-empty-state-card:
-    description: "Empty-state illustration frame."
-    backgroundColor: "{colors.canvas-soft}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.3xl}"
-    captionTypography: "{typography.body-md}"
-  ex-toast:
-    description: "Toast notification surface — feature-card shape + medium shadow."
-    backgroundColor: "{colors.canvas}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.md} {spacing.lg}"
-    typography: "{typography.body-sm}"
-
----
-
-
-## Overview
-
-Wired is the flagship technology-magazine brand under Condé Nast — and the web surface refuses to dress itself as a SaaS marketing site. The page is unmistakably an editorial product: a white canvas, a strict black wordmark in the brand's proprietary `WiredDisplay` (a tall, narrow, high-contrast serif used at 64 px), and stacked story cards that read as a printed magazine grid ported to the screen. There is no atmospheric gradient, no decorative chrome, no chromatic accent — the brand's only colour beyond the black-and-white duet is the small `{colors.link}` (`#057dbc`) used for inline body links inside long-form articles.
-
-Type carries the entire identity. Three families ladder the system: `WiredDisplay` (the proprietary high-contrast serif) for hero / section headlines; `BreveText` (a humanist serif) for long-form body and bylines; and `Apercu` (a humanist sans) for metadata, captions, eyebrow tags, and buttons. The pairing is editorial-grade: serifs for narrative, sans for navigation and structural labels.
-
-Buttons are square. The brand uses `{rounded.none}` 0 px corners across the entire UI — newsletter sign-ups, login forms, "Read more" CTAs all render as sharp rectangles. The only circular shape is the `button-icon-circular` used for social-share affordances. There are no soft drop-shadows; the brand uses hairline borders for elevation when needed.
+What makes Runway distinctive is its complete commitment to visual content as design. Rather than illustrating features with icons or diagrams, Runway shows actual AI-generated and AI-enhanced imagery — cars driving through cinematic landscapes, artistic portraits, architectural renders. The interface itself retreats into near-invisibility: minimal borders, zero shadows, subtle cool-gray text, and a dark palette that puts maximum focus on the photography.
 
 **Key Characteristics:**
-- A strict black-and-white duet with no chromatic accent except the inline link blue `{colors.link}`. The brand reads as a printed magazine.
-- Three-face typographic system — `WiredDisplay` serif for display, `BreveText` serif for body, `Apercu` sans for metadata and buttons.
-- Square buttons (`{rounded.none}`) — the brand never softens corners on interactive elements.
-- A magazine-style story grid: large feature card at top, two-up secondary, then a vertical stack of bylined story rows separated by `{colors.hairline}` 1 px dividers.
-- The brand's only signature decorative move is the **masthead band** — a thin black strip with the wordmark centred, no other decoration.
-- A near-black `{colors.ink}` (`#000000`) footer band, no graphics, just text columns and the wordmark repeating.
+- Cinematic full-bleed photography and video as primary UI elements
+- Single typeface system: abcNormal for everything from display to micro labels
+- Dark-dominant palette with cool-toned neutrals (#767d88, #7d848e)
+- Zero shadows, minimal borders — the interface is intentionally invisible
+- Tight display typography (line-height 1.0) with negative tracking (-0.9px to -1.2px)
+- Uppercase labels with positive letter-spacing for navigational structure
+- Weight 450 (unusual intermediate) for small uppercase text — precision craft
+- Editorial magazine layout with mixed-size image grids
 
-## Colors
+## 2. Color Palette & Roles
 
-### Brand & Accent
-- **Ink Black** (`{colors.primary}` — `#000000`): The brand's only "accent." Used for wordmark, headlines, CTAs, footer fill. Pure black, never softened.
+### Primary
+- **Runway Black** (`#000000`): The primary page background and maximum-emphasis text.
+- **Deep Black** (`#030303`): A near-imperceptible variant for layered dark surfaces.
+- **Dark Surface** (`#1a1a1a`): Card backgrounds and elevated dark containers.
+- **Pure White** (`#ffffff`): Primary text on dark surfaces and light-section backgrounds.
 
-### Surface
-- **Canvas** (`{colors.canvas}` — `#ffffff`): The default page background.
-- **Canvas Soft** (`{colors.canvas-soft}` — `#f5f5f5`): Rare tint used for the comment-section background and search-result row hover states (not in the main page rhythm).
-- **Hairline** (`{colors.hairline}` — `#e0e0e0`): 1 px dividers between story rows. The brand's only "line."
+### Surface & Background
+- **Near White** (`#fefefe`): The lightest surface — barely distinguishable from pure white.
+- **Cool Cloud** (`#e9ecf2`): Light section backgrounds with a cool blue-gray tint.
+- **Border Dark** (`#27272a`): The single dark-mode border color — barely visible containment.
 
-### Text
-- **Ink** (`{colors.ink}` — `#000000`): Every headline, every body paragraph in BreveText.
-- **Ink Soft** (`{colors.ink-soft}` — `#1a1a1a`): A near-black variant used for caption-strong / footer link emphasis.
-- **Body** (`{colors.body}` — `#757575`): Secondary metadata — bylines, timestamps, supporting body lines.
+### Neutrals & Text
+- **Charcoal** (`#404040`): Primary body text on light surfaces and secondary text.
+- **Near Charcoal** (`#3f3f3f`): Slightly lighter variant for dark-section secondary text.
+- **Cool Slate** (`#767d88`): Secondary body text — a distinctly blue-gray cool neutral.
+- **Mid Slate** (`#7d848e`): Tertiary text, metadata descriptions.
+- **Muted Gray** (`#a7a7a7`): De-emphasized content, timestamps.
+- **Cool Silver** (`#c9ccd1`): Light borders and dividers.
+- **Light Silver** (`#d0d4d4`): The lightest border/divider variant.
+- **Tailwind Gray** (`#6b7280`): Standard Tailwind neutral for supplementary text.
+- **Dark Link** (`#0c0c0c`): Darkest link text — nearly black.
+- **Footer Gray** (`#999999`): Footer links and deeply muted content.
 
-### Semantic
-The brand operates with one inline link colour and no separate error / success / warning palette in its marketing surface. Validation cues on form pages use the ink black + body grey hierarchy.
+### Gradient System
+- **None in the interface.** Visual richness comes entirely from photographic content — AI-generated and enhanced imagery provides all the color and gradient the design needs. The interface itself is intentionally colorless.
 
-- **Link** (`{colors.link}` — `#057dbc`): The inline body-link blue. Used only inside long-form article body copy, never on UI buttons or navigation.
-
-## Typography
+## 3. Typography Rules
 
 ### Font Family
-Three families ladder the system:
-1. **WiredDisplay** — the proprietary tall-narrow high-contrast serif used exclusively for display headlines (64 px hero, scaling down to 26 px sub-display). The brand's most-recognisable typographic signature.
-2. **BreveText** — the proprietary humanist serif used for long-form body, bylines, and editorial captions. Used at 16 – 19 px line-height 1.45 – 1.50 for comfortable reading density.
-3. **Apercu** — a humanist sans used for nav, button labels, category eyebrows, metadata, and captions. Weights 400 / 700.
+- **Universal**: `abcNormal`, with fallback: `abcNormal Fallback`
 
-Inter is loaded as a fourth fallback face for embedded utility surfaces (the comment section, account pages) but does not appear on the main marketing / article surface.
+*Note: abcNormal is a custom geometric sans-serif. For external implementations, Inter or DM Sans serve as close substitutes.*
 
 ### Hierarchy
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-hero}` | 64px | 400 | 59.5px | -0.5px | Cover-story headline. |
-| `{typography.display-lg}` | 48px | 400 | 50.4px | -0.4px | Major section / feature headlines. |
-| `{typography.display-md}` | 32px | 400 | 35.2px | -0.3px | Story-card large variant. |
-| `{typography.display-sm}` | 26px | 400 | 28px | 0 | Sub-display headings inside long-form articles. |
-| `{typography.display-xs}` | 20px | 700 | 24px | -0.28px | Sans (Apercu) display micro-headings for category callouts. |
-| `{typography.body-serif-lg}` | 19px | 400 | 27.93px | 0.108px | Lead paragraph of an article (BreveText). |
-| `{typography.body-serif-md}` | 16px | 400 | 24px | 0.09px | Default article body (BreveText). |
-| `{typography.body-md}` | 17px | 400 | 20px | 0 | Sans body (Apercu) for nav / metadata. |
-| `{typography.body-md-strong}` | 17px | 700 | 22px | -0.144px | Bold sans body. |
-| `{typography.body-sm}` | 14px | 400 | 18px | 0.4px | Secondary sans body. |
-| `{typography.body-sm-strong}` | 14px | 700 | 18px | 0.4px | Bold caption / nav-link. |
-| `{typography.byline}` | 12.73px | 700 | 28px | 0.108px | Article byline (BreveText). |
-| `{typography.caption}` | 12px | 400 | 16px | 0 | Fine print, image captions. |
-| `{typography.button-md}` | 16px | 700 | 20px | 0.3px | Button label. |
+| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
+|------|------|------|--------|-------------|----------------|-------|
+| Display / Hero | abcNormal | 48px (3rem) | 400 | 1.00 (tight) | -1.2px | Maximum size, film-title presence |
+| Section Heading | abcNormal | 40px (2.5rem) | 400 | 1.00–1.10 | -1px to 0px | Feature section titles |
+| Sub-heading | abcNormal | 36px (2.25rem) | 400 | 1.00 (tight) | -0.9px | Secondary section markers |
+| Card Title | abcNormal | 24px (1.5rem) | 400 | 1.00 (tight) | normal | Article and card headings |
+| Feature Title | abcNormal | 20px (1.25rem) | 400 | 1.00 (tight) | normal | Small headings |
+| Body / Button | abcNormal | 16px (1rem) | 400–600 | 1.30–1.50 | -0.16px to normal | Standard body, nav links |
+| Caption / Label | abcNormal | 14px (0.88rem) | 500–600 | 1.25–1.43 | 0.35px (uppercase) | Metadata, section labels |
+| Small | abcNormal | 13px (0.81rem) | 400 | 1.30 (tight) | -0.16px to -0.26px | Compact descriptions |
+| Micro / Tag | abcNormal | 11px (0.69rem) | 450 | 1.30 (tight) | normal | Uppercase tags, tiny labels |
 
 ### Principles
-- **Serif for narrative, sans for structure.** The serif faces never carry button labels or nav text; the sans face never carries article body.
-- **Display weight 400** — the proprietary WiredDisplay reads as elegant by virtue of its thin-tall-narrow design at default weight, not via weight 700+.
-- **Bylines use BreveText weight 700 with relaxed line-height 2.2.** The vertical breathing is part of the editorial signature.
+- **One typeface, complete expression**: abcNormal handles every text role. The design achieves variety through size, weight, case, and letter-spacing rather than font-family switching.
+- **Tight everywhere**: Nearly every size uses line-height 1.0–1.30 — even body text is relatively compressed. This creates a dense, editorial feel.
+- **Weight 450 — the precision detail**: Some small uppercase labels use weight 450, an uncommon intermediate between regular (400) and medium (500). This micro-craft signals typographic sophistication.
+- **Negative tracking as default**: Even body text uses -0.16px to -0.26px letter-spacing, keeping everything slightly tighter than default.
+- **Uppercase as structure**: Labels at 14px and 11px use `text-transform: uppercase` with positive letter-spacing (0.35px) to create navigational signposts that contrast with the tight lowercase text.
 
-### Note on Font Substitutes
-The three proprietary faces have no exact substitutes. Best open-source approximations:
-- **WiredDisplay** — *Playfair Display* weight 400 at large display sizes captures the high-contrast didone feel, though wider than the brand's tall-narrow proportions.
-- **BreveText** — *Lora* or *Source Serif Pro* at 16 – 19 px.
-- **Apercu** — *Inter* or *Manrope* weights 400 / 700.
-
-## Layout
-
-### Spacing System
-- **Base unit**: 4 px.
-- **Tokens**: `{spacing.xxs}` 2 px · `{spacing.xs}` 4 px · `{spacing.sm}` 8 px · `{spacing.md}` 12 px · `{spacing.lg}` 16 px · `{spacing.xl}` 20 px · `{spacing.2xl}` 24 px · `{spacing.3xl}` 32 px · `{spacing.4xl}` 48 px.
-- **Section padding**: hero / story grid use `{spacing.4xl}` 48 px top/bottom on desktop.
-- **Story row padding**: `{spacing.lg}` 16 px vertical between bylined story rows.
-
-### Grid & Container
-- Marketing content uses a wide container (~1400 px max).
-- Cover-story grid: 1 large hero + 2-up secondary stories + vertical stack.
-- Story-row stack: full-width single column with hairline dividers.
-
-### Responsive Strategy
-
-#### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 768px | Cover hero 64→40 px; all grids 1-up; hamburger nav. |
-| Tablet | 768–1023px | 2-up secondary story grid. |
-| Desktop | ≥ 1024px | Full magazine grid. |
-
-#### Touch Targets
-Button-primary renders ~44 px tall (12 vertical padding + 20 line). WCAG AAA at all widths.
-
-#### Collapsing Strategy
-- Nav: full link row + Subscribe CTA at desktop. Hamburger at mobile.
-- Magazine grid: hero stays full-width; 2-up secondary drops to 1-up at mobile.
-- Story rows: stay single-column at all viewports.
-
-#### Image Behavior
-- Cover images: full-bleed 16:9 hero / 4:3 secondary.
-- Article body images: full-width inside the article column.
-- Author avatars: small inline circular crops next to bylines.
-
-## Elevation & Depth
-
-| Level | Treatment | Use |
-|---|---|---|
-| Level 0 — Flat | No shadow, no border. | Default — almost every surface lives at this level. |
-| Level 1 — Hairline | 1 px solid `{colors.hairline}` border. | Story-row dividers, input borders. |
-| Level 2 — Heavy Black Border | 2 px solid `{colors.ink}` border. | Subscribe CTA on certain campaign moments. |
-
-The brand uses no drop-shadows. Surface contrast and hairline borders carry all visual hierarchy.
-
-## Shapes
-
-### Border Radius Scale
-
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Every interactive shape — buttons, inputs, cards. The brand's signature square geometry. |
-| `{rounded.full}` | 9999px | Circular icon containers only (social-share, account avatar). |
-
-### Photography Geometry
-- Cover stories: 16:9 hero, edge-to-edge.
-- Secondary story cards: 4:3 thumbnails.
-- Article body images: native aspect, full column width.
-- Bylines / avatars: circular `{rounded.full}` 28 px crops.
-
-## Components
+## 4. Component Stylings
 
 ### Buttons
-
-**`button-primary`** — the square black CTA.
-- Background `{colors.primary}`, text `{colors.on-primary}`, label `{typography.button-md}` (Apercu 16 px / 700 / 0.3 px tracking), padding `{spacing.md} {spacing.xl}`, shape `{rounded.none}` 0 px.
-
-**`button-outline`** — the white outline CTA.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, same typography / padding / shape.
-
-**`button-icon-circular`** — the circular share-icon button.
-- Background `{colors.canvas}`, ink icon, shape `{rounded.full}`.
+- Text: weight 600 at 14px abcNormal
+- Background: likely transparent or dark, with minimal border
+- Radius: small (4px) for button-like links
+- The button design is extremely restrained — no heavy fills or borders detected
+- Interactive elements blend into the editorial flow
 
 ### Cards & Containers
-
-**`story-card-large`** — the cover-story card with `{typography.display-md}` headline.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.lg}`. No border — the card lives on the canvas with the photo doing the work.
-
-**`story-card`** — the secondary story card.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md}`. Photo at top, sans display heading + body lead below.
-
-**`story-row`** — the bylined story list row.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.hairline}` bottom border, body in `{typography.body-md-strong}`, padding `{spacing.lg}` 0.
-
-### Inputs & Forms
-
-**`text-input`** — the standard text input.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, body in `{typography.body-md}`, padding `{spacing.md} {spacing.lg}`, shape `{rounded.none}`.
+- Background: transparent or Dark Surface (`#1a1a1a`)
+- Border: `1px solid #27272a` (dark mode) — barely visible containment
+- Radius: small (4–8px) for functional elements; 16px for alert-style containers
+- Shadow: zero — no shadows on any element
+- Cards are primarily photographic — the image IS the card
 
 ### Navigation
+- Minimal horizontal nav — transparent over hero content
+- Logo: Runway wordmark in white/black
+- Links: abcNormal at 16px, weight 400–600
+- Hover: text shifts to white or higher opacity
+- Extremely subtle — designed to not compete with visual content
 
-**`nav-bar`** — the top nav, light by default.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.xl}`. Layout: hamburger left, masthead centre, Subscribe right.
+### Image Treatment
+- Full-bleed cinematic photography and video dominate
+- AI-generated content shown at large scale as primary visual elements
+- Mixed-size image grids creating editorial magazine layouts
+- Dark overlays on hero images for text readability
+- Product screenshots with subtle rounded corners (8px)
 
-**`nav-link`** — link items inside nav.
-- Text `{colors.ink}`, set in `{typography.body-sm-strong}` (Apercu 14 / 700).
+### Distinctive Components
 
-**`footer`** — the black footer band.
-- Background `{colors.primary}`, text `{colors.on-primary}`, padding `{spacing.4xl} {spacing.xl}`. Body in `{typography.body-sm}` (Apercu 14 / 400). Footer column eyebrows in `{typography.body-sm-strong}`.
+**Cinematic Hero**
+- Full-viewport image or video with text overlay
+- Headline in 48px abcNormal, white on dark imagery
+- The image is always cinematic quality — film-grade composition
 
-### Signature Components
+**Research Article Cards**
+- Photographic thumbnails with article titles
+- Mixed-size grid layout (large feature + smaller supporting)
+- Clean text overlay or below-image caption style
 
-**`hero-band`** — the white hero band hosting the cover-story.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.4xl} {spacing.xl}`. Cover headline in `{typography.display-hero}` (WiredDisplay 64 px).
+**Trust Bar**
+- Company logos (leading organizations across industries)
+- Clean, monochrome treatment
+- Horizontal layout with generous spacing
 
-**`masthead-band`** — the thin top band with the wordmark.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.xl}`. The wordmark sits centred; flanked by section nav.
+**Mission Statement**
+- "We are building AI to simulate the world through imagination, art and aesthetics"
+- On a dark background with white text
+- The emotional close — artistic and philosophical
 
-**`category-eyebrow`** — the small uppercase category label above story headlines.
-- Text `{colors.ink}`, set in `{typography.body-sm-strong}` (Apercu 14 / 700 — though some campaigns use ALL CAPS via CSS).
+## 5. Layout Principles
 
-**`byline-row`** — the article byline strip.
-- Background `{colors.canvas}`, text `{colors.body}`, body in `{typography.byline}` (BreveText 12.73 / 700 / line-height 2.2). Includes an author avatar + name + date.
+### Spacing System
+- Base unit: 8px
+- Scale: 4px, 6px, 8px, 12px, 16px, 20px, 24px, 28px, 32px, 48px, 64px, 78px
+- Section vertical spacing: generous (48–78px)
+- Component gaps: 16–24px
 
-**`hairline-divider`** — the 1 px line between story rows.
-- 1 px solid `{colors.hairline}`.
+### Grid & Container
+- Max container width: up to 1600px (cinema-wide)
+- Hero: full-viewport, edge-to-edge
+- Content sections: centered with generous margins
+- Image grids: asymmetric, magazine-style mixed sizes
+- Footer: full-width dark section
 
-### Examples (illustrative)
+### Whitespace Philosophy
+- **Cinema-grade breathing**: Large vertical gaps between sections create a scrolling experience that feels like watching scenes change.
+- **Images replace whitespace**: Where other sites use empty space, Runway fills it with photography. The visual content IS the breathing room.
+- **Editorial grid asymmetry**: The image grid uses intentionally varied sizes — large hero images paired with smaller supporting images, creating visual rhythm.
 
-> Auto-derived kit-mirror demonstration surfaces (`scripts/derive-examples-block.mjs`). Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently. `TO_FILL` markers indicate missing primitives — resolve in the LLM judgment pass.
+### Border Radius Scale
+- Sharp (4px): Buttons, small interactive elements
+- Subtle (6px): Links, small containers
+- Comfortable (8px): Standard containers, image cards
+- Generous (16px): Alert-style containers, featured elements
 
-**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface.
-- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
+## 6. Depth & Elevation
 
-**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
-- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
+| Level | Treatment | Use |
+|-------|-----------|-----|
+| Flat (Level 0) | No shadow, no border | Everything — the dominant state |
+| Bordered (Level 1) | `1px solid #27272a` | Alert containers only |
+| Dark Section (Level 2) | Dark bg (#000000 / #1a1a1a) with light text | Hero, features, footer |
+| Light Section (Level 3) | White/Cool Cloud bg with dark text | Content sections, research |
 
-**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
-- Properties: `backgroundColor`, `rounded`, `padding`
+**Shadow Philosophy**: Runway uses **zero shadows**. This is a film-production design decision — in cinema, depth comes from lighting, focus, and composition, not drop shadows. The interface mirrors this philosophy: depth is communicated through dark/light section alternation, photographic depth-of-field, and overlay transparency — never through CSS box-shadow.
 
-**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
-- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
-
-**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
-- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
-
-**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
-- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
-
-**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-empty-state-card`** — Empty-state illustration frame.
-- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
-
-**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
-
-
-## Do's and Don'ts
+## 7. Do's and Don'ts
 
 ### Do
-- Reserve `{colors.primary}` black for the wordmark, every CTA, and the footer fill. The brand IS the strict black-on-white duet.
-- Set hero headlines in `{typography.display-hero}` (WiredDisplay 64 px weight 400). The proprietary serif IS the brand's typographic signature.
-- Use `{rounded.none}` 0 px on every button and form input. The brand reads as a printed magazine — square corners are non-negotiable.
-- Pair WiredDisplay (serif display) with BreveText (serif body) and Apercu (sans labels). Three faces, three roles.
-- Render story rows with `{colors.hairline}` 1 px dividers — the brand's only elevation cue.
+- Use full-bleed cinematic photography as the primary visual element
+- Use abcNormal for all text — maintain the single-typeface commitment
+- Keep display line-heights at 1.0 with negative letter-spacing for film-title density
+- Use the cool-gray neutral palette (#767d88, #7d848e) for secondary text
+- Maintain zero shadows — depth comes from photography and section backgrounds
+- Use uppercase with letter-spacing for navigational labels (14px, 0.35px spacing)
+- Apply small border-radius (4–8px) — the design is NOT pill-shaped
+- Let visual content (photos, videos) dominate — the UI should be invisible
+- Use weight 450 for micro labels — the precision matters
 
 ### Don't
-- Don't introduce a chromatic brand accent. The link blue is reserved for inline body links inside articles only.
-- Don't round button corners. The brand never softens its rectangular geometry.
-- Don't drop a soft drop-shadow on cards. Surface contrast and hairlines carry elevation.
-- Don't substitute the proprietary serif faces with a generic sans for display. The serif voice is the brand.
-- Don't promote display weight beyond 400. The brand's elegance is in the typeface design, not bold weight.
+- Don't add decorative colors to the interface — the only color comes from photography
+- Don't use heavy borders or shadows — the interface must be nearly invisible
+- Don't use pill-shaped radius — Runway's geometry is subtly rounded, not circular
+- Don't use bold (700+) weight — 400–600 is the full range, with 450 as a precision tool
+- Don't compete with the visual content — text overlays should be minimal and restrained
+- Don't use gradient backgrounds in the interface — gradients exist only in photography
+- Don't use more than one typeface — abcNormal handles everything
+- Don't use body line-height above 1.50 — the tight, editorial feel is core
+- Don't reduce image quality — cinematic photography IS the design
+
+## 8. Responsive Behavior
+
+### Breakpoints
+| Name | Width | Key Changes |
+|------|-------|-------------|
+| Mobile | <640px | Single column, stacked images, reduced hero text |
+| Tablet | 640–768px | 2-column image grids begin |
+| Small Desktop | 768–1024px | Standard layout |
+| Desktop | 1024–1280px | Full layout, expanded hero |
+| Large Desktop | 1280–1600px | Maximum cinema-width container |
+
+### Touch Targets
+- Navigation links at comfortable 16px
+- Article cards serve as large touch targets
+- Buttons at 14px weight 600 with adequate padding
+
+### Collapsing Strategy
+- **Navigation**: Collapses to hamburger on mobile
+- **Hero**: Full-bleed maintained, text scales down
+- **Image grids**: Multi-column → 2-column → single column
+- **Research articles**: Feature-size cards → stacked full-width
+- **Trust logos**: Horizontal scroll or reduced grid
+
+### Image Behavior
+- Cinematic images scale proportionally
+- Full-bleed hero maintained across all sizes
+- Image grids reflow to fewer columns
+- Video content maintains aspect ratio
+
+## 9. Agent Prompt Guide
+
+### Quick Color Reference
+- Background Dark: "Runway Black (#000000)"
+- Background Light: "Pure White (#ffffff)"
+- Primary Text Dark: "Charcoal (#404040)"
+- Secondary Text: "Cool Slate (#767d88)"
+- Muted Text: "Muted Gray (#a7a7a7)"
+- Light Border: "Cool Silver (#c9ccd1)"
+- Dark Border: "Border Dark (#27272a)"
+- Card Surface: "Dark Surface (#1a1a1a)"
+
+### Example Component Prompts
+- "Create a cinematic hero section: full-bleed dark background with a cinematic image overlay. Headline at 48px abcNormal weight 400, line-height 1.0, letter-spacing -1.2px in white. Minimal text below in Cool Slate (#767d88) at 16px."
+- "Design a research article grid: one large card (50% width) with a cinematic image and 24px title, next to two smaller cards stacked. All images with 8px border-radius. Titles in white (dark bg) or Charcoal (#404040, light bg)."
+- "Build a section label: 14px abcNormal weight 500, uppercase, letter-spacing 0.35px in Cool Slate (#767d88). No border, no background."
+- "Create a trust bar: company logos in monochrome, horizontal layout with generous spacing. On dark background with white/gray logo treatments."
+- "Design a mission statement section: Runway Black background, white text at 36px abcNormal, line-height 1.0, letter-spacing -0.9px. Centered, with generous vertical padding."
+
+### Iteration Guide
+1. Visual content first — always include cinematic photography
+2. Use abcNormal for everything — specify size and weight, never change the font
+3. Keep the interface invisible — no heavy borders, no shadows, no bright colors
+4. Use the cool slate grays (#767d88, #7d848e) for secondary text — not warm grays
+5. Uppercase labels need letter-spacing (0.35px) — never tight uppercase
+6. Dark sections should be truly dark (#000000 or #1a1a1a) — no medium grays as surfaces
