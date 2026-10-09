@@ -1,5 +1,7 @@
 # FUJIMOTO ARCHIVE
 
+Live: https://dans-vsa.github.io/fujimoto-archive/
+
 Unofficial fan hub of Tatsuki Fujimoto's works — profile, every work (serials, one-shots,
 collections, unpublished contest entries), career timeline, adaptations and awards.
 Each work links to its **own blog**; works without one yet show "Blog segera hadir".
