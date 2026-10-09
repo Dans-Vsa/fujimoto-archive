@@ -76,7 +76,7 @@ const WORKS = [
     type: "oneshot-long",
     year: 2021,
     featured: true,
-    blog: null,
+    blog: "https://look-back-fujimoto.vercel.app/",
     venue: { id: "Shōnen Jump+", en: "Shōnen Jump+" },
     size: { id: "One-shot panjang · 1 volume", en: "Long one-shot · 1 volume" },
     tagline: {
