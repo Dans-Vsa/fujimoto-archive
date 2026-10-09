@@ -108,7 +108,7 @@ const WORKS = [
     type: "oneshot-long",
     year: 2022,
     featured: true,
-    blog: null,
+    blog: "https://dans-vsa.github.io/goodbye-eri-fanblog/",
     venue: { id: "Shōnen Jump+", en: "Shōnen Jump+" },
     size: { id: "One-shot 200 halaman · 1 volume", en: "200-page one-shot · 1 volume" },
     tagline: {

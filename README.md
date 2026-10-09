@@ -18,5 +18,6 @@ Linked blogs:
 - Chainsaw Man → https://dans-vsa.github.io/chainsaw-man-fanblog/
 - Fire Punch → https://dans-vsa.github.io/fire-punch-fanblog/
 - Look Back → https://look-back-fujimoto.vercel.app/
+- Goodbye, Eri → https://dans-vsa.github.io/goodbye-eri-fanblog/
 
 Covers live in `assets/covers/` (WebP, official Shueisha art via the Chainsaw Man Fandom Wiki; four copied from the CSM blog's assets). One-shots use their original magazine title page (`assets/covers/<id>.webp`, same Fandom source); the `col` field notes which collection volume they appear in. Only the two unpublished contest manuscripts have no image and render as a manuscript page. Copy rule: no em/en dashes in visible text.
