@@ -1,29 +1,35 @@
 # DESIGN.md: Fujimoto Archive (hub of Tatsuki Fujimoto's works)
 
-Base system: **Vercel** (from design-md-library): near-white canvas, ink type, Geist + Geist Mono,
-hairline structure. History: Wired (manga paper) → Runway (dark cinematic, rejected as "AI slop":
-gradient blobs, identical cards) → this. These adaptations OVERRIDE the Vercel spec below:
+Base system: **Vercel** (from design-md-library): Geist + Geist Mono, hairline structure, restrained UI.
+History: Wired → Runway (rejected as "AI slop": gradient blobs) → light "bookshelf" → this
+**"library at night"** (user asked for a library-shelf background with a cursor spotlight, maximum
+interactivity, still elegant and minimal). These adaptations OVERRIDE the Vercel spec below:
 
 ## Design read
-Fan bibliography for manga readers, "bookshelf" language: the real volume covers are the only
-imagery and carry all the color; the UI stays neutral and precise. Dials: variance 7, motion 4, density 4.
+Interactive fan archive for manga readers. The hero IS a library bookcase at night: every work is a
+book spine; a spotlight follows the cursor and the chosen book's real cover is shown on a lit reading desk.
+Dials: variance 7, motion 7 (motivated: spotlight = attention, lift/lean = feedback, desk swap = state), density 4.
 
 ## Project adaptations
-- **No mesh gradient, no glows, no grain.** The Vercel hero gradient is NOT used. Covers are the decoration.
-- **Palette (cool neutral, light only):** canvas `#fafafa`, surface `#ffffff`, soft `#f2f2f2`,
-  ink `#171717`, body `#4d4d4d`, mute `#7a7a7a`, hairline `#e5e5e5`.
-  **One accent: Jump red `#d6322a`** (links-on-hover, the "blog live" button, timeline markers). Nothing else is colored.
-- **Fonts:** Geist (400/500/600) for everything, Geist Mono for years, counts and metadata. Noto Sans JP 500 for Japanese titles.
-- **Shape lock:** buttons/filters pill (`9999px`); covers `3px` (book corners) with a 1px inner hairline;
-  containers `12px`. Shadows only under covers (tinted, soft), never on cards.
-- **Covers:** `assets/covers/*.webp` (Chainsaw Man Fandom Wiki, official Shueisha art). Works without
-  their own cover point to the collection volume they appear in (`col: "17-21" | "22-26"`).
-- **Layout families per section (no repeats):** hero = split text + fanned cover stack; works = cover
-  shelf; one-shots = index grouped by collection volume; timeline = horizontal year band;
-  adaptations = feature poster + list; awards = 3 highlight tiles + one line for the rest.
-- **Copy rules:** no em/en dashes anywhere (use comma, colon, period, or hyphen for ranges);
-  at most 2 small uppercase labels on the whole page; sentence case headings.
-- Each work has a **blog status**: `live` (red pill button → that work's own blog) or plain mute text "Blog segera hadir".
+- **Theme: dark only** (`color-scheme: dark`), one theme for the whole site.
+  canvas `#0f1012`, surface `#16171a`, soft `#1d1f23`, ink `#ececec`, body `#a9a9a9`, mute `#808080`,
+  line `#26282d`, wood `#1b1c20`/`#2c2e33`. Lamp light `rgb(255 232 198)` used only as low-alpha glow.
+  **One accent: `#e0473d`** (blog button, selected-book marker, serial bars in the timeline).
+- **Color comes only from Fujimoto's art**: real covers (`assets/covers/`) and spine colors sampled from them
+  (`spine` field in `works.js`). Decorative "other books" are grey, `aria-hidden`, non-interactive.
+- **Bookcase:** spine thickness ~ volume count, height ~ format; vertical Japanese title (`writing-mode: vertical-rl`).
+  Hover: book lifts, neighbours lean away (`:has()`); selected book stays lifted with a red marker.
+- **Spotlight:** `.spot` radial-gradient overlay driven by `--mx/--my` (registered with `@property`
+  so it glides back to the selected book when the cursor leaves). Pointer updates batched in rAF.
+  "Lamp" button turns the spotlight off (full light) for accessibility.
+- **Reading desk:** cover with pointer-driven 3D tilt + soft glare; swap uses a CSS enter animation
+  (NOT the View Transitions API: its overlay steals pointer events and fires pointerleave).
+- **Input parity:** hover previews (fine pointers only), click/tap selects (persisted in localStorage),
+  arrow keys / Home / End move along the shelf (roving tabindex). Touch copy says "tap", not "hover".
+- Motion respects `prefers-reduced-motion`. Sections below the hero fade in once (IntersectionObserver),
+  gated behind `html.js` so content is never hidden without JS.
+- **Shape lock:** pills for buttons/toggles, 2-3px book corners, 12px containers.
+- **Copy rules:** no em/en dashes in visible text, sentence case, curly quotes.
 
 ---
 

@@ -5,6 +5,7 @@
 const WORKS = [
   {
     id: "chainsaw-man",
+    spine: { bg: "#cf4f2d", fg: "#ffffff", w: 66, h: 248 },
     cover: "assets/covers/chainsaw-man.webp",
     title: "Chainsaw Man",
     jp: "チェンソーマン",
@@ -41,6 +42,7 @@ const WORKS = [
   },
   {
     id: "fire-punch",
+    spine: { bg: "#b01528", fg: "#f5e4a8", w: 46, h: 248 },
     cover: "assets/covers/fire-punch.webp",
     title: "Fire Punch",
     jp: "ファイアパンチ",
@@ -67,6 +69,7 @@ const WORKS = [
   },
   {
     id: "look-back",
+    spine: { bg: "#c6c964", fg: "#2b2a17", w: 32, h: 240 },
     cover: "assets/covers/look-back.webp",
     title: "Look Back",
     jp: "ルックバック",
@@ -98,6 +101,7 @@ const WORKS = [
   },
   {
     id: "goodbye-eri",
+    spine: { bg: "#16223b", fg: "#f08a4b", w: 36, h: 240 },
     cover: "assets/covers/goodbye-eri.webp",
     title: "Goodbye, Eri",
     jp: "さよなら絵梨",
@@ -124,6 +128,7 @@ const WORKS = [
   },
   {
     id: "just-listen",
+    spine: { bg: "#2b2d31", fg: "#e6e6e6", w: 22, h: 216 },
     title: "Just Listen to the Song",
     jp: "フツーに聞いてくれ",
     type: "oneshot",
@@ -144,6 +149,7 @@ const WORKS = [
   },
   {
     id: "17-26",
+    spine: { bg: "#f2703a", fg: "#eae95f", w: 44, h: 240 },
     cover: "assets/covers/17-21.webp",
     cover2: "assets/covers/22-26.webp",
     title: "Tatsuki Fujimoto Before Chainsaw Man",
@@ -175,6 +181,7 @@ const WORKS = [
   },
   {
     id: "sisters",
+    spine: { bg: "#d9ce9f", fg: "#414773", w: 24, h: 222 },
     col: "22-26",
     title: "Sisters",
     jp: "妹の姉",
@@ -194,6 +201,7 @@ const WORKS = [
   },
   {
     id: "woke-up-as-a-girl",
+    spine: { bg: "#a7a488", fg: "#23233b", w: 24, h: 222 },
     col: "22-26",
     title: "Woke-Up-as-a-Girl Syndrome",
     jp: "目が覚めたら女の子になっていた病",
@@ -213,6 +221,7 @@ const WORKS = [
   },
   {
     id: "nayuta",
+    spine: { bg: "#e8e19b", fg: "#414773", w: 24, h: 222 },
     col: "22-26",
     title: "Nayuta of the Prophecy",
     jp: "予言のナユタ",
@@ -232,6 +241,7 @@ const WORKS = [
   },
   {
     id: "mermaid-rhapsody",
+    spine: { bg: "#414773", fg: "#e8e19b", w: 24, h: 222 },
     col: "22-26",
     title: "Mermaid Rhapsody",
     jp: "人魚ラプソディ",
@@ -251,6 +261,7 @@ const WORKS = [
   },
   {
     id: "shikaku",
+    spine: { bg: "#9c8148", fg: "#1d1608", w: 24, h: 222 },
     col: "17-21",
     title: "Shikaku",
     jp: "シカク",
@@ -270,6 +281,7 @@ const WORKS = [
   },
   {
     id: "love-is-blind",
+    spine: { bg: "#914d33", fg: "#f3e7c9", w: 24, h: 222 },
     col: "17-21",
     title: "Love is Blind",
     jp: "恋は盲目",
@@ -289,6 +301,7 @@ const WORKS = [
   },
   {
     id: "sasaki",
+    spine: { bg: "#9ab87b", fg: "#1f2a15", w: 24, h: 222 },
     col: "17-21",
     title: "Sasaki Stopped a Bullet",
     jp: "佐々木くんが銃弾止めた",
@@ -308,6 +321,7 @@ const WORKS = [
   },
   {
     id: "chickens",
+    spine: { bg: "#eae95f", fg: "#5a2d1c", w: 24, h: 222 },
     col: "17-21",
     title: "A Couple Clucking Chickens Were Still Kickin' in the Schoolyard",
     jp: "庭には二羽ニワトリがいた",
@@ -327,6 +341,7 @@ const WORKS = [
   },
   {
     id: "kami-hikoki",
+    spine: { bg: "#dedad0", fg: "#4d4d4d", w: 18, h: 196 },
     title: "Kami Hikōki (Paper Planes)",
     jp: "かみひこうき",
     type: "unpublished",
@@ -344,6 +359,7 @@ const WORKS = [
   },
   {
     id: "seigi-no-mikata",
+    spine: { bg: "#cfcabe", fg: "#4d4d4d", w: 18, h: 196 },
     title: "Seigi no Mikata (Sense of Justice)",
     jp: "正義の見方",
     type: "unpublished",

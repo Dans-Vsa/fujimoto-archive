@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fujimoto Archive: semua karya Tatsuki Fujimoto</title>
   <meta name="description" content="Arsip fan semua karya Tatsuki Fujimoto: Chainsaw Man, Fire Punch, Look Back, Goodbye, Eri, dan one-shot awal. Tiap karya punya blognya sendiri.">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#0f1012">
+  <meta name="color-scheme" content="dark">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Fujimoto Archive">
   <meta property="og:description" content="Dari one-shot usia 17 sampai Chainsaw Man. Semua karya Tatsuki Fujimoto dalam satu arsip.">
@@ -14,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/style.css?v=15">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Lewati ke konten</a>
@@ -39,47 +40,48 @@
   </header>
 
   <main id="main">
-    <section class="hero container">
-      <div class="hero__copy">
-        <h1 class="hero__title">Tatsuki Fujimoto</h1>
-        <p class="hero__jp" lang="ja">藤本タツキ</p>
-        <p class="hero__dek" data-i18n="hero.dek">Semua karyanya dalam satu rak, dari one-shot lomba di usia 17 sampai Chainsaw Man.</p>
-        <a class="btn btn--ink" href="#works" data-i18n="hero.cta">Lihat karya</a>
+    <section class="library" id="works" aria-labelledby="lib-title">
+      <div class="library__head container">
+        <div>
+          <h1 class="library__title" id="lib-title">Tatsuki Fujimoto</h1>
+          <p class="library__dek"><span lang="ja" class="jp">藤本タツキ</span> <span data-i18n="hero.dek">Semua karyanya di satu rak. Arahkan kursor ke punggung buku.</span></p>
+        </div>
+        <button class="lamp" id="lamp" aria-pressed="false" data-i18n="lamp.on">Nyalakan lampu</button>
       </div>
-      <div class="stack" id="stack" aria-hidden="true"></div>
+      <div class="library__room container">
+        <div class="stacks" id="stacks">
+          <div class="shelves" id="shelves" role="toolbar" aria-label="Rak karya" aria-controls="desk"></div>
+          <div class="spot" aria-hidden="true"></div>
+        </div>
+        <aside class="desk" id="desk" aria-live="polite"></aside>
+      </div>
     </section>
 
-    <section class="profile container" aria-labelledby="profile-h">
+    <section class="profile container reveal" aria-labelledby="profile-h">
       <h2 class="sr" id="profile-h" data-i18n="profile.title">Profil</h2>
       <p class="profile__bio" id="bio"></p>
       <dl class="profile__facts" id="profile-facts"></dl>
     </section>
 
-    <section class="section container" id="works">
-      <h2 class="h2" data-i18n="works.title">Rak karya</h2>
-      <p class="section__dek" data-i18n="works.dek">Karya yang punya blog sendiri langsung tersambung. Sisanya menyusul.</p>
-      <div class="shelf" id="shelf"></div>
-    </section>
-
-    <section class="section container" id="oneshots">
+    <section class="section container reveal" id="oneshots">
       <h2 class="h2" data-i18n="oneshots.title">One-shot dan karya awal</h2>
       <p class="section__dek" data-i18n="oneshots.dek">Delapan cerita pendek terkumpul di dua volume, dinamai sesuai usia Fujimoto saat menggambarnya.</p>
       <div class="index" id="index"></div>
     </section>
 
-    <section class="section" id="timeline">
+    <section class="section reveal" id="timeline">
       <div class="container">
         <h2 class="h2" data-i18n="timeline.title">Linimasa 2011 sampai 2026</h2>
       </div>
       <div class="band" id="band" tabindex="0" aria-label="Linimasa"></div>
     </section>
 
-    <section class="section container" id="screen">
+    <section class="section container reveal" id="screen">
       <h2 class="h2" data-i18n="adapt.title">Di layar</h2>
       <div class="screen" id="screen-grid"></div>
     </section>
 
-    <section class="section container" id="awards">
+    <section class="section container reveal" id="awards">
       <h2 class="h2" data-i18n="awards.title">Penghargaan</h2>
       <div class="awards" id="award-grid"></div>
       <p class="awards__rest" id="award-rest"></p>
@@ -94,7 +96,7 @@
     </div>
   </footer>
 
-  <script src="js/works.js?v=8"></script>
-  <script src="js/app.js?v=8"></script>
+  <script src="js/works.js?v=15"></script>
+  <script src="js/app.js?v=15"></script>
 </body>
 </html>

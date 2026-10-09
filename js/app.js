@@ -1,12 +1,16 @@
 /* Fujimoto Archive: render hub (index.html) dan halaman karya (karya.html) */
 (() => {
+  document.documentElement.classList.add("js");
   const UI = {
     id: {
       skip: "Lewati ke konten",
       "nav.works": "Karya", "nav.oneshots": "One-shot", "nav.timeline": "Linimasa",
       "nav.adaptations": "Adaptasi", "nav.awards": "Penghargaan", "nav.back": "Semua karya",
-      "hero.dek": "Semua karyanya dalam satu rak, dari one-shot lomba di usia 17 sampai Chainsaw Man.",
-      "hero.cta": "Lihat karya",
+      "hero.dek": "Semua karyanya di satu rak. Arahkan kursor ke punggung buku.",
+      "hero.dekTouch": "Semua karyanya di satu rak. Ketuk punggung buku.",
+      "lamp.on": "Nyalakan lampu", "lamp.off": "Matikan lampu",
+      "shelf.major": "Serial dan one-shot panjang", "shelf.short": "Cerpen 17-21, 22-26, dan lainnya",
+      detail: "Detail karya",
       "profile.title": "Profil",
       "works.title": "Rak karya",
       "works.dek": "Karya yang punya blog sendiri langsung tersambung. Sisanya menyusul.",
@@ -36,8 +40,11 @@
       skip: "Skip to content",
       "nav.works": "Works", "nav.oneshots": "One-shots", "nav.timeline": "Timeline",
       "nav.adaptations": "Adaptations", "nav.awards": "Awards", "nav.back": "All works",
-      "hero.dek": "His whole body of work on one shelf, from a contest one-shot at 17 to Chainsaw Man.",
-      "hero.cta": "See the works",
+      "hero.dek": "His whole body of work on one shelf. Hover over a spine.",
+      "hero.dekTouch": "His whole body of work on one shelf. Tap a spine.",
+      "lamp.on": "Turn the lights on", "lamp.off": "Turn the lights off",
+      "shelf.major": "Serials and long one-shots", "shelf.short": "Short stories 17-21, 22-26, and more",
+      detail: "Work details",
       "profile.title": "Profile",
       "works.title": "The shelf",
       "works.dek": "Works with their own blog link straight to it. The rest are on the way.",
@@ -83,36 +90,238 @@
     ? `<a class="btn btn--accent${big ? "" : " btn--sm"}" href="${w.blog}" target="_blank" rel="noopener">${t("blogLive")} <span aria-hidden="true">↗</span></a>`
     : `<span class="soon">${t("blogSoon")}</span>`;
 
-  /* ── Hub ─────────────────────────────────────── */
+  /* ── Perpustakaan (hero) ─────────────────────── */
   const SHELF = ["chainsaw-man", "fire-punch", "look-back", "goodbye-eri", "17-26"];
+  // Rak atas: karya besar. Rak bawah: cerpen per volume, lalu karya lain & naskah lomba.
+  const ROWS = [
+    { key: "shelf.major", ids: ["fire-punch", "chainsaw-man", "look-back", "goodbye-eri", "17-26"] },
+    { key: "shelf.short", ids: ["chickens", "sasaki", "love-is-blind", "shikaku", "|", "mermaid-rhapsody", "nayuta", "woke-up-as-a-girl", "sisters", "|", "just-listen", "kami-hikoki", "seigi-no-mikata"] }
+  ];
+  const lib = { sel: localStorage.getItem("fa-book") || "chainsaw-man", lampOn: false, hoverTimer: 0 };
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  function renderLibrary() {
+    if (!byId[lib.sel]) lib.sel = "chainsaw-man";
+    let n = 0;
+    $("#shelves").innerHTML = ROWS.map((row) => `
+      <div class="shelf">
+        <span class="shelf__label mono">${t(row.key)}</span>
+        <ul class="shelf__books">
+          ${row.ids.map((id) => {
+            if (id === "|") return `<li class="gap" aria-hidden="true"></li>`;
+            const w = byId[id], s = w.spine;
+            return `<li class="slot" style="--i:${n++}">
+              <button class="spine${w.type === "unpublished" ? " spine--ms" : ""}" data-id="${w.id}"
+                style="--bg:${s.bg};--fg:${s.fg};--w:${s.w}px;--h:${s.h}px"
+                aria-pressed="${w.id === lib.sel}" tabindex="${w.id === lib.sel ? 0 : -1}"
+                aria-label="${esc(w.title)}, ${years(w)}">
+                <span class="spine__band" aria-hidden="true"></span>
+                <span class="spine__jp" lang="ja" aria-hidden="true">${esc(w.jp.replace(/[「」]/g, " "))}</span>
+                <span class="spine__yr mono" aria-hidden="true">${String(w.year).slice(2)}</span>
+              </button>
+            </li>`;
+          }).join("")}
+          <li class="bookend" aria-hidden="true"></li>
+        </ul>
+      </div>`).join("");
+    fillShelves();
+    renderDesk(lib.sel, false);
+    syncLamp();
+    requestAnimationFrame(() => aimSpot(lib.sel));
+  }
+
+  // Buku lain di perpustakaan: dekorasi abu-abu yang mengisi sisa rak (tidak interaktif)
+  const FILL_TONES = ["#24262b", "#2a2724", "#1f2828", "#2a2329", "#26282e", "#2e2b26", "#1d2024", "#2b2e2a"];
+  function fillShelves() {
+    let seed = 7;
+    const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+    document.querySelectorAll(".shelf__books").forEach((ul, row) => {
+      const end = ul.querySelector(".bookend");
+      let used = [...ul.children].reduce((s, li) => s + li.offsetWidth + 3, 0);
+      const room = ul.clientWidth - 8;
+      const frag = document.createDocumentFragment();
+      while (used < room) {
+        const wpx = Math.round(14 + rnd() * 20), h = Math.round((row ? 168 : 188) + rnd() * 52);
+        if (used + wpx > room) break;
+        const li = document.createElement("li");
+        li.className = "filler";
+        li.setAttribute("aria-hidden", "true");
+        li.style.cssText = `--w:${wpx}px;--h:${h}px;--bg:${FILL_TONES[Math.floor(rnd() * FILL_TONES.length)]}${rnd() > 0.82 ? ";--lean:-6deg" : ""}`;
+        frag.appendChild(li);
+        used += wpx + 3;
+      }
+      ul.insertBefore(frag, end);
+    });
+  }
+
+  // Meja baca: karya yang sedang disorot
+  function deskArt(w) {
+    const src = w.cover || (w.col && volCover(w.col));
+    if (!src) {
+      return `<div class="desk__art desk__art--ms" style="--bg:${w.spine.bg};--fg:${w.spine.fg}">
+        <span class="desk__ms-title">${esc(w.title)}</span><span class="desk__ms-jp" lang="ja">${esc(w.jp)}</span>
+        <span class="desk__ms-yr mono">${w.year}</span></div>`;
+    }
+    const pair = w.cover2 ? `<img class="desk__img desk__img--back" src="${w.cover2}" alt="" width="764" height="1200">` : "";
+    return `<div class="desk__art">${pair}<img class="desk__img" src="${src}" alt="${esc(w.title)}" width="764" height="1200"></div>`;
+  }
+
+  function renderDesk(id, animate = true) {
+    const w = byId[id], desk = $("#desk");
+    const note = !w.cover && w.col ? `<p class="desk__note">${t("inVol")} ${w.col}</p>` : "";
+    const html = `
+      <div class="desk__tilt" id="tilt">${deskArt(w)}</div>
+      <div class="desk__info">
+        <p class="meta">${t("type")[w.type]}<span>${years(w)}</span></p>
+        <h2 class="desk__title">${esc(w.title)}</h2>
+        <p class="desk__tag">${esc(L(w.tagline))}</p>
+        ${note}
+        <div class="desk__actions">
+          <a class="btn btn--ghost btn--sm" href="${href(w)}">${t("detail")}</a>
+          ${blog(w, false)}
+        </div>
+      </div>`;
+    desk.innerHTML = html;
+    desk.dataset.id = id;
+    desk.classList.toggle("is-swap", animate && !reduceMotion);
+  }
+
+  function select(id, { focus = false, persist = true } = {}) {
+    if (!byId[id]) return;
+    const changed = id !== $("#desk").dataset.id;
+    if (persist) {
+      lib.sel = id;
+      localStorage.setItem("fa-book", id);
+      document.querySelectorAll(".spine").forEach((b) => {
+        const on = b.dataset.id === id;
+        b.setAttribute("aria-pressed", on);
+        b.tabIndex = on ? 0 : -1;
+        if (on && focus) b.focus({ preventScroll: true });
+      });
+    }
+    if (changed) renderDesk(id);
+  }
+
+  // Lampu sorot: posisi disimpan di CSS var --mx/--my (di-animate lewat @property)
+  function aimSpot(id) {
+    const stacks = $("#stacks"), b = document.querySelector(`.spine[data-id="${id}"]`);
+    if (!stacks || !b) return;
+    const r = stacks.getBoundingClientRect(), br = b.getBoundingClientRect();
+    stacks.style.setProperty("--mx", `${br.left - r.left + br.width / 2}px`);
+    stacks.style.setProperty("--my", `${br.top - r.top + br.height * 0.45}px`);
+  }
+
+  function syncLamp() {
+    const btn = $("#lamp");
+    if (!btn) return;
+    $(".library").classList.toggle("is-lit", lib.lampOn);
+    btn.setAttribute("aria-pressed", lib.lampOn);
+    btn.textContent = t(lib.lampOn ? "lamp.off" : "lamp.on");
+  }
+
+  function bindLibrary() {
+    const stacks = $("#stacks"), shelves = $("#shelves"), desk = $("#desk");
+    if (!stacks) return;
+    let raf = 0, px = 0, py = 0;
+
+    stacks.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse") return;
+      const r = stacks.getBoundingClientRect();
+      px = e.clientX - r.left; py = e.clientY - r.top;
+      stacks.classList.add("is-tracking");
+      if (!raf) raf = requestAnimationFrame(() => {
+        stacks.style.setProperty("--mx", `${px}px`);
+        stacks.style.setProperty("--my", `${py}px`);
+        raf = 0;
+      });
+    });
+    stacks.addEventListener("pointerleave", () => {
+      stacks.classList.remove("is-tracking");
+      clearTimeout(lib.hoverTimer);
+      if ($("#desk").dataset.id !== lib.sel) renderDesk(lib.sel);
+      aimSpot(lib.sel);
+    });
+
+    // Hover = pratinjau di meja; klik = pilih (tersimpan)
+    shelves.addEventListener("pointerover", (e) => {
+      const b = e.target.closest(".spine");
+      if (!b || !canHover) return;
+      clearTimeout(lib.hoverTimer);
+      lib.hoverTimer = setTimeout(() => select(b.dataset.id, { persist: false }), 90);
+    });
+    shelves.addEventListener("click", (e) => {
+      const b = e.target.closest(".spine");
+      if (!b) return;
+      select(b.dataset.id);
+      if (!canHover) aimSpot(b.dataset.id);
+      if (!canHover && innerWidth < 900) desk.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+    });
+    shelves.addEventListener("focusin", (e) => {
+      const b = e.target.closest(".spine");
+      if (b && !stacks.classList.contains("is-tracking")) aimSpot(b.dataset.id);
+    });
+
+    // Navigasi keyboard di rak (roving tabindex)
+    shelves.addEventListener("keydown", (e) => {
+      const books = [...document.querySelectorAll(".spine")];
+      const i = books.indexOf(document.activeElement);
+      if (i < 0) return;
+      const go = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: books.length - 1 }[e.key];
+      if (go === undefined) {
+        if (e.key === "Enter" && e.shiftKey) location.href = href(byId[books[i].dataset.id]);
+        return;
+      }
+      e.preventDefault();
+      const nb = books[(go + books.length) % books.length];
+      select(nb.dataset.id, { focus: true });
+      aimSpot(nb.dataset.id);
+    });
+
+    // Sampul di meja miring mengikuti kursor
+    desk.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse" || reduceMotion) return;
+      const tilt = $("#tilt"); if (!tilt) return;
+      const r = tilt.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      tilt.style.setProperty("--rx", `${(-y * 10).toFixed(2)}deg`);
+      tilt.style.setProperty("--ry", `${(x * 14).toFixed(2)}deg`);
+      tilt.style.setProperty("--gx", `${((x + 0.5) * 100).toFixed(1)}%`);
+      tilt.style.setProperty("--gy", `${((y + 0.5) * 100).toFixed(1)}%`);
+    });
+    desk.addEventListener("pointerleave", () => {
+      const tilt = $("#tilt"); if (!tilt) return;
+      ["--rx", "--ry"].forEach((p) => tilt.style.setProperty(p, "0deg"));
+    });
+
+    $("#lamp").addEventListener("click", () => { lib.lampOn = !lib.lampOn; syncLamp(); });
+    let rt = 0, lastW = innerWidth;
+    addEventListener("resize", () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        if (Math.abs(innerWidth - lastW) > 40) { lastW = innerWidth; document.querySelectorAll(".filler").forEach((f) => f.remove()); fillShelves(); }
+        aimSpot(lib.sel);
+      }, 150);
+    }, { passive: true });
+  }
+
+  // Bagian lain muncul halus saat masuk layar
+  function bindReveal() {
+    const els = document.querySelectorAll(".reveal");
+    if (reduceMotion || !("IntersectionObserver" in window)) { els.forEach((el) => el.classList.add("is-in")); return; }
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+      if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); }
+    }), { rootMargin: "0px 0px -10% 0px" });
+    els.forEach((el) => io.observe(el));
+  }
+
+  /* ── Hub ─────────────────────────────────────── */
 
   function renderHub() {
-    // Hero: tumpukan sampul asli
-    const stack = ["22-26", "17-21", "goodbye-eri", "look-back", "fire-punch", "chainsaw-man"];
-    $("#stack").innerHTML = stack.map((c, i) => `<img class="stack__item" style="--i:${i}" src="assets/covers/${c}.webp" alt="" width="764" height="1200"${i === stack.length - 1 ? ' fetchpriority="high"' : ""}>`).join("");
+    renderLibrary();
 
     $("#bio").textContent = L(PROFILE.bio);
     $("#profile-facts").innerHTML = PROFILE.facts.map((f) => `<div><dt>${L(f.k)}</dt><dd>${L(f.v)}</dd></div>`).join("");
-
-    // Rak karya
-    $("#shelf").innerHTML = SHELF.map((id) => {
-      const w = byId[id];
-      const wide = id === "chainsaw-man" || id === "goodbye-eri" || id === "17-26";
-      const covers = w.cover2
-        ? `<div class="pair">${img(w.cover, `${w.title} 17-21`)}${img(w.cover2, `${w.title} 22-26`)}</div>`
-        : img(w.cover, `${w.title}, ${t("vol")} 1`);
-      return `
-        <article class="book${wide ? " book--wide" : ""}${w.blog ? " book--live" : ""}">
-          <a class="book__cover" href="${href(w)}" tabindex="-1" aria-hidden="true">${covers}</a>
-          <div class="book__body">
-            <p class="meta">${t("type")[w.type]}<span>${years(w)}</span></p>
-            <h3 class="book__title"><a href="${href(w)}">${esc(w.title)}</a></h3>
-            <p class="book__tag">${esc(L(w.tagline))}</p>
-            ${wide ? `<p class="book__syn">${esc(L(w.synopsis))}</p>` : ""}
-            <div class="book__foot">${blog(w, wide && !!w.blog)}</div>
-          </div>
-        </article>`;
-    }).join("");
 
     // Indeks one-shot per volume
     const groups = [
@@ -231,11 +440,12 @@
   function applyLang() {
     document.documentElement.lang = lang;
     document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const v = UI[lang][el.dataset.i18n];
+      const key = el.dataset.i18n === "hero.dek" && !canHover ? "hero.dekTouch" : el.dataset.i18n;
+      const v = UI[lang][key];
       if (typeof v === "string") el.textContent = v;
     });
     document.querySelectorAll(".lang__btn").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
-    if ($("#shelf")) renderHub(); else renderDetail();
+    if ($("#shelves")) renderHub(); else renderDetail();
   }
 
   document.addEventListener("click", (e) => {
@@ -244,4 +454,5 @@
   });
 
   applyLang();
+  if ($("#shelves")) { bindLibrary(); bindReveal(); }
 })();
