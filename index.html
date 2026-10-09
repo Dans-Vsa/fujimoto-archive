@@ -3,29 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FUJIMOTO ARCHIVE — Semua Karya Tatsuki Fujimoto</title>
-  <meta name="description" content="Arsip fan semua karya Tatsuki Fujimoto: Chainsaw Man, Fire Punch, Look Back, Goodbye Eri, dan one-shot awal. Tiap karya punya blognya sendiri.">
-  <meta name="theme-color" content="#000000">
+  <title>Fujimoto Archive: semua karya Tatsuki Fujimoto</title>
+  <meta name="description" content="Arsip fan semua karya Tatsuki Fujimoto: Chainsaw Man, Fire Punch, Look Back, Goodbye, Eri, dan one-shot awal. Tiap karya punya blognya sendiri.">
+  <meta name="theme-color" content="#fafafa">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FUJIMOTO ARCHIVE — Track record Tatsuki Fujimoto">
-  <meta property="og:description" content="Dari one-shot usia 17 sampai Chainsaw Man. Semua karya Fujimoto dalam satu arsip.">
+  <meta property="og:title" content="Fujimoto Archive">
+  <meta property="og:description" content="Dari one-shot usia 17 sampai Chainsaw Man. Semua karya Tatsuki Fujimoto dalam satu arsip.">
+  <meta property="og:image" content="assets/covers/chainsaw-man.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23171717'/%3E%3Crect x='9' y='7' width='4' height='18' fill='%23fafafa'/%3E%3Crect x='9' y='7' width='13' height='4' fill='%23fafafa'/%3E%3Crect x='9' y='15' width='10' height='4' fill='%23d6322a'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,450;9..40,500;9..40,600&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Lewati ke konten</a>
 
   <header class="masthead">
     <div class="masthead__inner">
-      <a class="wordmark" href="index.html" aria-label="Fujimoto Archive">FUJIMOTO<span class="wordmark__slash" aria-hidden="true">/</span>ARCHIVE</a>
-      <nav class="nav" aria-label="Utama">
-        <ul class="nav__links">
-          <li><a href="#profile" data-i18n="nav.profile">Profil</a></li>
+      <a class="wordmark" href="index.html" translate="no">Fujimoto Archive</a>
+      <nav aria-label="Utama">
+        <ul class="nav">
           <li><a href="#works" data-i18n="nav.works">Karya</a></li>
+          <li><a href="#oneshots" data-i18n="nav.oneshots">One-shot</a></li>
           <li><a href="#timeline" data-i18n="nav.timeline">Linimasa</a></li>
-          <li><a href="#adaptations" data-i18n="nav.adaptations">Adaptasi</a></li>
+          <li><a href="#screen" data-i18n="nav.adaptations">Adaptasi</a></li>
           <li><a href="#awards" data-i18n="nav.awards">Penghargaan</a></li>
         </ul>
       </nav>
@@ -37,76 +39,62 @@
   </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="hero__light" aria-hidden="true"></div>
-      <div class="hero__inner">
-        <p class="label" data-i18n="hero.eyebrow">Arsip fan · 2011 — 2026</p>
+    <section class="hero container">
+      <div class="hero__copy">
         <h1 class="hero__title">Tatsuki Fujimoto</h1>
         <p class="hero__jp" lang="ja">藤本タツキ</p>
-        <p class="hero__dek" data-i18n="hero.dek">Semua karya, dari one-shot lomba di usia 17 sampai Chainsaw Man. Pilih satu karya untuk masuk ke blognya sendiri.</p>
-        <a class="btn btn--ghost" href="#works" data-i18n="hero.cta">Lihat semua karya ↓</a>
+        <p class="hero__dek" data-i18n="hero.dek">Semua karyanya dalam satu rak, dari one-shot lomba di usia 17 sampai Chainsaw Man.</p>
+        <a class="btn btn--ink" href="#works" data-i18n="hero.cta">Lihat karya</a>
       </div>
-      <dl class="stats" id="stats"></dl>
+      <div class="stack" id="stack" aria-hidden="true"></div>
     </section>
 
-    <section class="section" id="profile">
-      <div class="container profile">
-        <div>
-          <p class="label" data-i18n="profile.eyebrow">Profil mangaka</p>
-          <h2 class="h2" data-i18n="profile.title">Siapa Fujimoto?</h2>
-          <p class="lede" id="bio"></p>
-        </div>
-        <dl class="facts" id="profile-facts"></dl>
-      </div>
+    <section class="profile container" aria-labelledby="profile-h">
+      <h2 class="sr" id="profile-h" data-i18n="profile.title">Profil</h2>
+      <p class="profile__bio" id="bio"></p>
+      <dl class="profile__facts" id="profile-facts"></dl>
     </section>
 
-    <section class="section" id="works">
+    <section class="section container" id="works">
+      <h2 class="h2" data-i18n="works.title">Rak karya</h2>
+      <p class="section__dek" data-i18n="works.dek">Karya yang punya blog sendiri langsung tersambung. Sisanya menyusul.</p>
+      <div class="shelf" id="shelf"></div>
+    </section>
+
+    <section class="section container" id="oneshots">
+      <h2 class="h2" data-i18n="oneshots.title">One-shot dan karya awal</h2>
+      <p class="section__dek" data-i18n="oneshots.dek">Delapan cerita pendek terkumpul di dua volume, dinamai sesuai usia Fujimoto saat menggambarnya.</p>
+      <div class="index" id="index"></div>
+    </section>
+
+    <section class="section" id="timeline">
       <div class="container">
-        <div class="section__head">
-          <div>
-            <p class="label" data-i18n="works.eyebrow">Karya</p>
-            <h2 class="h2" data-i18n="works.title">Pilih karya, masuk ke blognya</h2>
-          </div>
-          <div class="chips" role="group" aria-label="Filter" id="filters"></div>
-        </div>
-        <div class="works" id="works-grid"></div>
+        <h2 class="h2" data-i18n="timeline.title">Linimasa 2011 sampai 2026</h2>
       </div>
+      <div class="band" id="band" tabindex="0" aria-label="Linimasa"></div>
     </section>
 
-    <section class="section section--credits" id="timeline">
-      <div class="container">
-        <p class="label" data-i18n="timeline.eyebrow">Track record</p>
-        <h2 class="h2" data-i18n="timeline.title">Linimasa karier</h2>
-        <ol class="timeline" id="timeline-list"></ol>
-      </div>
+    <section class="section container" id="screen">
+      <h2 class="h2" data-i18n="adapt.title">Di layar</h2>
+      <div class="screen" id="screen-grid"></div>
     </section>
 
-    <section class="section section--light" id="adaptations">
-      <div class="container">
-        <p class="label" data-i18n="adapt.eyebrow">Layar</p>
-        <h2 class="h2" data-i18n="adapt.title">Adaptasi anime &amp; film</h2>
-        <ul class="rows" id="adapt-list"></ul>
-      </div>
-    </section>
-
-    <section class="section" id="awards">
-      <div class="container">
-        <p class="label" data-i18n="awards.eyebrow">Pengakuan</p>
-        <h2 class="h2" data-i18n="awards.title">Penghargaan</h2>
-        <ul class="rows" id="award-list"></ul>
-      </div>
+    <section class="section container" id="awards">
+      <h2 class="h2" data-i18n="awards.title">Penghargaan</h2>
+      <div class="awards" id="award-grid"></div>
+      <p class="awards__rest" id="award-rest"></p>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer__inner">
-      <p class="footer__mark">FUJIMOTO<span class="wordmark__slash">/</span>ARCHIVE</p>
-      <p data-i18n="footer.note">Situs fan tidak resmi. Semua karya © Tatsuki Fujimoto / Shueisha. Data dari Wikipedia &amp; sumber resmi, dicek Oktober 2026.</p>
-      <p><a class="inline-link" href="https://mangaplus.shueisha.co.jp/" target="_blank" rel="noopener" data-i18n="footer.read">Baca legal di MANGA Plus</a></p>
+      <p class="wordmark">Fujimoto Archive</p>
+      <p data-i18n="footer.note">Situs fan tidak resmi. Semua karya milik Tatsuki Fujimoto dan Shueisha. Gambar sampul dari Chainsaw Man Fandom Wiki. Data dari Wikipedia, dicek Oktober 2026.</p>
+      <p><a href="https://mangaplus.shueisha.co.jp/" target="_blank" rel="noopener" data-i18n="footer.read">Baca legal di MANGA Plus</a></p>
     </div>
   </footer>
 
-  <script src="js/works.js?v=2"></script>
-  <script src="js/app.js?v=2"></script>
+  <script src="js/works.js?v=8"></script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>
