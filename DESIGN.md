@@ -16,8 +16,12 @@ Dials: variance 7, motion 7 (motivated: spotlight = attention, lift/lean = feedb
   line `#26282d`, wood `#1b1c20`/`#2c2e33`. Lamp light `rgb(255 232 198)` used only as low-alpha glow.
   **One accent: `#e0473d`** (blog button, selected-book marker, serial bars in the timeline).
 - **Color comes only from Fujimoto's art**: real covers (`assets/covers/`) and spine colors sampled from them
-  (`spine` field in `works.js`). Decorative "other books" are grey, `aria-hidden`, non-interactive.
-- **Bookcase:** spine thickness ~ volume count, height ~ format; vertical Japanese title (`writing-mode: vertical-rl`).
+  (`spine` field in `works.js`). No decorative/dummy books: only Fujimoto's 16 works are on the shelf.
+- **Bookcase:** ONE shelf, all 16 works in chronological order, split by wooden dividers into three era
+  compartments (2011-2015 early work, 2016-2018 Fire Punch years, 2018-2026 Chainsaw Man years), each
+  labelled under the plank. Book size scales with `--k` (1.2 desktop, 1.1 tablet, 1 phone); when the shelf
+  is wider than the screen it scrolls sideways, auto-centres the selected book and fades the cut-off edge.
+  Spine thickness ~ volume count, height ~ format; vertical Japanese title (`writing-mode: vertical-rl`).
   Hover: book lifts, neighbours lean away (`:has()`); selected book stays lifted with a red marker.
 - **Spotlight:** `.spot` radial-gradient overlay driven by `--mx/--my` (registered with `@property`
   so it glides back to the selected book when the cursor leaves). Pointer updates batched in rAF.

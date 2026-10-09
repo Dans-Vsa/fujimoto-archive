@@ -9,7 +9,7 @@
       "hero.dek": "Semua karyanya di satu rak. Arahkan kursor ke punggung buku.",
       "hero.dekTouch": "Semua karyanya di satu rak. Ketuk punggung buku.",
       "lamp.on": "Nyalakan lampu", "lamp.off": "Matikan lampu",
-      "shelf.major": "Serial dan one-shot panjang", "shelf.short": "Cerpen 17-21, 22-26, dan lainnya",
+      "era.early": "Karya awal", "era.fp": "Era Fire Punch", "era.csm": "Era Chainsaw Man",
       detail: "Detail karya",
       "profile.title": "Profil",
       "works.title": "Rak karya",
@@ -43,7 +43,7 @@
       "hero.dek": "His whole body of work on one shelf. Hover over a spine.",
       "hero.dekTouch": "His whole body of work on one shelf. Tap a spine.",
       "lamp.on": "Turn the lights on", "lamp.off": "Turn the lights off",
-      "shelf.major": "Serials and long one-shots", "shelf.short": "Short stories 17-21, 22-26, and more",
+      "era.early": "Early work", "era.fp": "The Fire Punch years", "era.csm": "The Chainsaw Man years",
       detail: "Work details",
       "profile.title": "Profile",
       "works.title": "The shelf",
@@ -92,10 +92,11 @@
 
   /* ── Perpustakaan (hero) ─────────────────────── */
   const SHELF = ["chainsaw-man", "fire-punch", "look-back", "goodbye-eri", "17-26"];
-  // Rak atas: karya besar. Rak bawah: cerpen per volume, lalu karya lain & naskah lomba.
-  const ROWS = [
-    { key: "shelf.major", ids: ["fire-punch", "chainsaw-man", "look-back", "goodbye-eri", "17-26"] },
-    { key: "shelf.short", ids: ["chickens", "sasaki", "love-is-blind", "shikaku", "|", "mermaid-rhapsody", "nayuta", "woke-up-as-a-girl", "sisters", "|", "just-listen", "kami-hikoki", "seigi-no-mikata"] }
+  // Satu rak, urut kronologis, dibagi sekat per era
+  const COMPARTMENTS = [
+    { key: "era.early", yrs: "2011-2015", ids: ["chickens", "love-is-blind", "sasaki", "kami-hikoki", "seigi-no-mikata", "shikaku", "mermaid-rhapsody", "nayuta"] },
+    { key: "era.fp", yrs: "2016-2018", ids: ["fire-punch", "woke-up-as-a-girl", "sisters"] },
+    { key: "era.csm", yrs: "2018-2026", ids: ["chainsaw-man", "look-back", "17-26", "goodbye-eri", "just-listen"] }
   ];
   const lib = { sel: localStorage.getItem("fa-book") || "chainsaw-man", lampOn: false, hoverTimer: 0 };
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -104,55 +105,50 @@
   function renderLibrary() {
     if (!byId[lib.sel]) lib.sel = "chainsaw-man";
     let n = 0;
-    $("#shelves").innerHTML = ROWS.map((row) => `
+    const spine = (w) => {
+      const s = w.spine;
+      return `<li class="slot" style="--i:${n++}">
+        <button class="spine${w.type === "unpublished" ? " spine--ms" : ""}" data-id="${w.id}"
+          style="--bg:${s.bg};--fg:${s.fg};--w:${s.w}px;--h:${s.h}px"
+          aria-pressed="${w.id === lib.sel}" tabindex="${w.id === lib.sel ? 0 : -1}"
+          aria-label="${esc(w.title)}, ${years(w)}">
+          <span class="spine__band" aria-hidden="true"></span>
+          <span class="spine__jp" lang="ja" aria-hidden="true">${esc(w.jp.replace(/[「」]/g, " "))}</span>
+          <span class="spine__yr mono" aria-hidden="true">${String(w.year).slice(2)}</span>
+        </button>
+      </li>`;
+    };
+    // lebar tiap ruang = jumlah tebal buku + celah, dipakai juga untuk label di bawah papan
+    const width = (c) => c.ids.reduce((s, id) => s + byId[id].spine.w, 0) + 3 * (c.ids.length - 1);
+    $("#shelves").innerHTML = `
       <div class="shelf">
-        <span class="shelf__label mono">${t(row.key)}</span>
-        <ul class="shelf__books">
-          ${row.ids.map((id) => {
-            if (id === "|") return `<li class="gap" aria-hidden="true"></li>`;
-            const w = byId[id], s = w.spine;
-            return `<li class="slot" style="--i:${n++}">
-              <button class="spine${w.type === "unpublished" ? " spine--ms" : ""}" data-id="${w.id}"
-                style="--bg:${s.bg};--fg:${s.fg};--w:${s.w}px;--h:${s.h}px"
-                aria-pressed="${w.id === lib.sel}" tabindex="${w.id === lib.sel ? 0 : -1}"
-                aria-label="${esc(w.title)}, ${years(w)}">
-                <span class="spine__band" aria-hidden="true"></span>
-                <span class="spine__jp" lang="ja" aria-hidden="true">${esc(w.jp.replace(/[「」]/g, " "))}</span>
-                <span class="spine__yr mono" aria-hidden="true">${String(w.year).slice(2)}</span>
-              </button>
-            </li>`;
-          }).join("")}
-          <li class="bookend" aria-hidden="true"></li>
-        </ul>
-      </div>`).join("");
-    fillShelves();
+        <div class="shelf__inner">
+          <div class="shelf__books">
+            ${COMPARTMENTS.map((c, i) => `
+              ${i ? '<span class="divider" aria-hidden="true"></span>' : ""}
+              <ul class="comp" style="--cw:${width(c)}px" aria-label="${t(c.key)} ${c.yrs}">${c.ids.map((id) => spine(byId[id])).join("")}</ul>`).join("")}
+          </div>
+          <div class="shelf__labels" aria-hidden="true">
+            ${COMPARTMENTS.map((c, i) => `${i ? '<span class="divider divider--ghost"></span>' : ""}
+              <span class="comp__label" style="--cw:${width(c)}px"><span class="mono">${c.yrs}</span>${t(c.key)}</span>`).join("")}
+          </div>
+        </div>
+      </div>`;
     renderDesk(lib.sel, false);
     syncLamp();
-    requestAnimationFrame(() => aimSpot(lib.sel));
+    requestAnimationFrame(() => { revealSelected(); aimSpot(lib.sel); });
   }
 
-  // Buku lain di perpustakaan: dekorasi abu-abu yang mengisi sisa rak (tidak interaktif)
-  const FILL_TONES = ["#24262b", "#2a2724", "#1f2828", "#2a2329", "#26282e", "#2e2b26", "#1d2024", "#2b2e2a"];
-  function fillShelves() {
-    let seed = 7;
-    const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
-    document.querySelectorAll(".shelf__books").forEach((ul, row) => {
-      const end = ul.querySelector(".bookend");
-      let used = [...ul.children].reduce((s, li) => s + li.offsetWidth + 3, 0);
-      const room = ul.clientWidth - 8;
-      const frag = document.createDocumentFragment();
-      while (used < room) {
-        const wpx = Math.round(14 + rnd() * 20), h = Math.round((row ? 168 : 188) + rnd() * 52);
-        if (used + wpx > room) break;
-        const li = document.createElement("li");
-        li.className = "filler";
-        li.setAttribute("aria-hidden", "true");
-        li.style.cssText = `--w:${wpx}px;--h:${h}px;--bg:${FILL_TONES[Math.floor(rnd() * FILL_TONES.length)]}${rnd() > 0.82 ? ";--lean:-6deg" : ""}`;
-        frag.appendChild(li);
-        used += wpx + 3;
-      }
-      ul.insertBefore(frag, end);
-    });
+  // Rak yang lebih lebar dari layar (HP): geser ke buku terpilih + petunjuk tepi pudar
+  function revealSelected() {
+    const shelf = $(".shelf"), b = document.querySelector(`.spine[data-id="${lib.sel}"]`);
+    if (!shelf || !b) return;
+    const scrollable = shelf.scrollWidth > shelf.clientWidth + 2;
+    shelf.classList.toggle("is-scrollable", scrollable);
+    if (!scrollable) return;
+    const r = shelf.getBoundingClientRect(), br = b.getBoundingClientRect();
+    shelf.scrollLeft += br.left - r.left - (r.width - br.width) / 2;
+    shelf.classList.toggle("at-end", shelf.scrollLeft + shelf.clientWidth >= shelf.scrollWidth - 4);
   }
 
   // Meja baca: karya yang sedang disorot
@@ -295,13 +291,12 @@
     });
 
     $("#lamp").addEventListener("click", () => { lib.lampOn = !lib.lampOn; syncLamp(); });
-    let rt = 0, lastW = innerWidth;
-    addEventListener("resize", () => {
-      clearTimeout(rt);
-      rt = setTimeout(() => {
-        if (Math.abs(innerWidth - lastW) > 40) { lastW = innerWidth; document.querySelectorAll(".filler").forEach((f) => f.remove()); fillShelves(); }
-        aimSpot(lib.sel);
-      }, 150);
+    let rt = 0;
+    addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => aimSpot(lib.sel), 150); }, { passive: true });
+    $(".shelf").addEventListener("scroll", (e) => {
+      const s = e.currentTarget;
+      s.classList.toggle("at-end", s.scrollLeft + s.clientWidth >= s.scrollWidth - 4);
+      if (!stacks.classList.contains("is-tracking")) aimSpot(lib.sel);
     }, { passive: true });
   }
 
