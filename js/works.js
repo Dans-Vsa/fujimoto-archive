@@ -49,7 +49,7 @@ const WORKS = [
     type: "serial",
     year: 2016, end: 2018,
     featured: true,
-    blog: null,
+    blog: "https://dans-vsa.github.io/fire-punch-fanblog/",
     venue: { id: "Shōnen Jump+", en: "Shōnen Jump+" },
     size: { id: "8 volume", en: "8 volumes" },
     tagline: {
