@@ -14,4 +14,4 @@ Run locally: `python -m http.server 5520`
 
 Linked blogs: Chainsaw Man → https://dans-vsa.github.io/chainsaw-man-fanblog/
 
-Covers live in `assets/covers/` (WebP, official Shueisha art via the Chainsaw Man Fandom Wiki; four copied from the CSM blog's assets). One-shots without their own cover show the collection volume they appear in (`col` field in `works.js`). Copy rule: no em/en dashes in visible text.
+Covers live in `assets/covers/` (WebP, official Shueisha art via the Chainsaw Man Fandom Wiki; four copied from the CSM blog's assets). One-shots use their original magazine title page (`assets/covers/<id>.webp`, same Fandom source); the `col` field notes which collection volume they appear in. Only the two unpublished contest manuscripts have no image and render as a manuscript page. Copy rule: no em/en dashes in visible text.

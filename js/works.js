@@ -129,6 +129,7 @@ const WORKS = [
   {
     id: "just-listen",
     spine: { bg: "#2b2d31", fg: "#e6e6e6", w: 22, h: 216 },
+    cover: "assets/covers/just-listen.webp",
     title: "Just Listen to the Song",
     jp: "フツーに聞いてくれ",
     type: "oneshot",
@@ -182,6 +183,7 @@ const WORKS = [
   {
     id: "sisters",
     spine: { bg: "#d9ce9f", fg: "#414773", w: 24, h: 222 },
+    cover: "assets/covers/sisters.webp",
     col: "22-26",
     title: "Sisters",
     jp: "妹の姉",
@@ -202,6 +204,7 @@ const WORKS = [
   {
     id: "woke-up-as-a-girl",
     spine: { bg: "#a7a488", fg: "#23233b", w: 24, h: 222 },
+    cover: "assets/covers/woke-up-as-a-girl.webp",
     col: "22-26",
     title: "Woke-Up-as-a-Girl Syndrome",
     jp: "目が覚めたら女の子になっていた病",
@@ -222,6 +225,7 @@ const WORKS = [
   {
     id: "nayuta",
     spine: { bg: "#e8e19b", fg: "#414773", w: 24, h: 222 },
+    cover: "assets/covers/nayuta.webp",
     col: "22-26",
     title: "Nayuta of the Prophecy",
     jp: "予言のナユタ",
@@ -242,6 +246,7 @@ const WORKS = [
   {
     id: "mermaid-rhapsody",
     spine: { bg: "#414773", fg: "#e8e19b", w: 24, h: 222 },
+    cover: "assets/covers/mermaid-rhapsody.webp",
     col: "22-26",
     title: "Mermaid Rhapsody",
     jp: "人魚ラプソディ",
@@ -262,6 +267,7 @@ const WORKS = [
   {
     id: "shikaku",
     spine: { bg: "#9c8148", fg: "#1d1608", w: 24, h: 222 },
+    cover: "assets/covers/shikaku.webp",
     col: "17-21",
     title: "Shikaku",
     jp: "シカク",
@@ -282,6 +288,7 @@ const WORKS = [
   {
     id: "love-is-blind",
     spine: { bg: "#914d33", fg: "#f3e7c9", w: 24, h: 222 },
+    cover: "assets/covers/love-is-blind.webp",
     col: "17-21",
     title: "Love is Blind",
     jp: "恋は盲目",
@@ -302,6 +309,7 @@ const WORKS = [
   {
     id: "sasaki",
     spine: { bg: "#9ab87b", fg: "#1f2a15", w: 24, h: 222 },
+    cover: "assets/covers/sasaki.webp",
     col: "17-21",
     title: "Sasaki Stopped a Bullet",
     jp: "佐々木くんが銃弾止めた",
@@ -322,6 +330,7 @@ const WORKS = [
   {
     id: "chickens",
     spine: { bg: "#eae95f", fg: "#5a2d1c", w: 24, h: 222 },
+    cover: "assets/covers/chickens.webp",
     col: "17-21",
     title: "A Couple Clucking Chickens Were Still Kickin' in the Schoolyard",
     jp: "庭には二羽ニワトリがいた",

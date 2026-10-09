@@ -19,7 +19,7 @@
       "timeline.title": "Linimasa 2011 sampai 2026",
       "adapt.title": "Di layar",
       "awards.title": "Penghargaan",
-      "footer.note": "Situs fan tidak resmi. Semua karya milik Tatsuki Fujimoto dan Shueisha. Gambar sampul dari Chainsaw Man Fandom Wiki. Data dari Wikipedia, dicek Oktober 2026.",
+      "footer.note": "Situs fan tidak resmi. Semua karya milik Tatsuki Fujimoto dan Shueisha. Gambar sampul dan halaman judul dari Chainsaw Man Fandom Wiki. Data dari Wikipedia, dicek Oktober 2026.",
       "footer.read": "Baca legal di MANGA Plus",
       type: { serial: "Serial", "oneshot-long": "One-shot panjang", oneshot: "One-shot", collection: "Kumpulan cerpen", unpublished: "Tidak terbit" },
       blogLive: "Buka blog", blogSoon: "Blog segera hadir",
@@ -53,7 +53,7 @@
       "timeline.title": "Timeline, 2011 to 2026",
       "adapt.title": "On screen",
       "awards.title": "Awards",
-      "footer.note": "Unofficial fan site. All works belong to Tatsuki Fujimoto and Shueisha. Cover images from the Chainsaw Man Fandom Wiki. Data from Wikipedia, checked October 2026.",
+      "footer.note": "Unofficial fan site. All works belong to Tatsuki Fujimoto and Shueisha. Cover and title-page images from the Chainsaw Man Fandom Wiki. Data from Wikipedia, checked October 2026.",
       "footer.read": "Read legally on MANGA Plus",
       type: { serial: "Serial", "oneshot-long": "Long one-shot", oneshot: "One-shot", collection: "Short story collection", unpublished: "Unpublished" },
       blogLive: "Open blog", blogSoon: "Blog coming soon",
@@ -169,7 +169,7 @@
 
   function renderDesk(id, animate = true) {
     const w = byId[id], desk = $("#desk");
-    const note = !w.cover && w.col ? `<p class="desk__note">${t("inVol")} ${w.col}</p>` : "";
+    const note = w.col ? `<p class="desk__note">${t("inVol")} ${w.col}</p>` : "";
     const html = `
       <div class="desk__tilt" id="tilt">${deskArt(w)}</div>
       <div class="desk__info">
@@ -339,6 +339,7 @@
           ${g.items.sort((a, b) => a.year - b.year).map((w) => `
             <li><a class="entry" href="${href(w)}">
               <span class="mono entry__year">${w.year}</span>
+              ${w.cover ? img(w.cover, "", "entry__thumb") : `<span class="entry__thumb entry__thumb--ms" style="--bg:${w.spine.bg}"></span>`}
               <span class="entry__title">${esc(w.title)}<small lang="ja">${esc(w.jp)}</small></span>
               <span class="entry__venue">${esc(L(w.venue))}</span>
             </a></li>`).join("")}
@@ -403,8 +404,9 @@
     const w = byYear[i], prev = byYear[i - 1], next = byYear[i + 1];
     document.title = `${w.title}: Fujimoto Archive`;
 
+    const volNote = w.col ? `<p class="detail__note">${t("inVol")} <a href="${href(byId["17-26"])}">${w.col}</a></p>` : "";
     const cover = w.cover
-      ? `<div class="detail__cover">${w.cover2 ? `<div class="pair">${img(w.cover, "17-21")}${img(w.cover2, "22-26")}</div>` : img(w.cover, w.title)}</div>`
+      ? `<div class="detail__cover">${w.cover2 ? `<div class="pair">${img(w.cover, "17-21")}${img(w.cover2, "22-26")}</div>` : img(w.cover, w.title)}${volNote}</div>`
       : w.col
         ? `<div class="detail__cover">${img(volCover(w.col), `${t("vol")} ${w.col}`)}<p class="detail__note">${t("inVol")} <a href="${href(byId["17-26"])}">${w.col}</a></p></div>`
         : "";
