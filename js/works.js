@@ -158,7 +158,7 @@ const WORKS = [
     type: "collection",
     year: 2021,
     featured: true,
-    blog: null,
+    blog: "https://dans-vsa.github.io/before-chainsaw-man-fanblog/",
     venue: { id: "Shueisha (Jump Comics+)", en: "Shueisha (Jump Comics+)" },
     size: { id: "2 volume: 17-21 & 22-26", en: "2 volumes: 17-21 & 22-26" },
     tagline: {
