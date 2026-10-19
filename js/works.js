@@ -294,7 +294,7 @@ const WORKS = [
     jp: "恋は盲目",
     type: "oneshot",
     year: 2013,
-    blog: null,
+    blog: "https://dans-vsa.github.io/love-is-blind-fanwiki/",
     venue: { id: "Jump SQ.19 (2014)", en: "Jump SQ.19 (2014)" },
     size: { id: "One-shot · koleksi 17-21", en: "One-shot · in 17-21" },
     tagline: { id: "Karya pertama Fujimoto yang terbit di majalah.", en: "Fujimoto's first work published in a magazine." },
