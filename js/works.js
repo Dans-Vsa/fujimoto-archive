@@ -336,7 +336,7 @@ const WORKS = [
     jp: "庭には二羽ニワトリがいた",
     type: "oneshot",
     year: 2011,
-    blog: null,
+    blog: "https://dans-vsa.github.io/niwatori-fanblog/",
     venue: { id: "Shōnen Jump+ (2017)", en: "Shōnen Jump+ (2017)" },
     size: { id: "One-shot · koleksi 17-21", en: "One-shot · in 17-21" },
     tagline: { id: "Karya paling awal, dibuat di usia 17.", en: "His earliest work, drawn at 17." },
