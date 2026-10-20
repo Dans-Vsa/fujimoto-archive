@@ -315,7 +315,7 @@ const WORKS = [
     jp: "佐々木くんが銃弾止めた",
     type: "oneshot",
     year: 2013,
-    blog: null,
+    blog: "https://dans-vsa.github.io/sasaki-fanblog/",
     venue: { id: "Shōnen Jump+ (2016)", en: "Shōnen Jump+ (2016)" },
     size: { id: "One-shot · koleksi 17-21", en: "One-shot · in 17-21" },
     tagline: { id: "Murid yang rela menghentikan peluru demi gurunya.", en: "A student who'd stop a bullet for his teacher." },
