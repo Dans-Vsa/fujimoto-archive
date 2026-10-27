@@ -3,19 +3,19 @@
 const SHELF_ORDER = ["chickens", "love-is-blind", "sasaki", "kami-hikoki", "seigi-no-mikata", "shikaku", "mermaid-rhapsody", "nayuta", "fire-punch", "woke-up-as-a-girl", "sisters", "chainsaw-man", "look-back", "17-26", "goodbye-eri", "just-listen"];
 const SHELF_VISUALS = {
   "chickens": {
-    "color": "#eae95f",
-    "foil": "#5a2d1c",
+    "color": "#1f2429",
+    "foil": "#e04a3c",
     "palette": {
-      "paper": "#e1e05b",
-      "paperDeep": "#b0af47",
-      "paperPale": "#fcf8dd",
-      "ink": "#262615",
-      "inkSoft": "#605f2b",
-      "wall": "#e1e05b",
-      "shelf": "#4f3921",
+      "paper": "#191e22",
+      "paperDeep": "#14171b",
+      "paperPale": "#e0dcd6",
+      "ink": "#e4e0da",
+      "inkSoft": "#aaa9a6",
+      "wall": "#191e22",
+      "shelf": "#37211a",
       "shelfDark": "#1c0e0a",
-      "light": "#fbf2ca",
-      "fill": "#f3f3a7"
+      "light": "#d7cfc1",
+      "fill": "#848789"
     },
     "width": 0.98,
     "height": 1.5,
@@ -24,19 +24,19 @@ const SHELF_VISUALS = {
     "seed": 11
   },
   "love-is-blind": {
-    "color": "#914d33",
-    "foil": "#f3e7c9",
+    "color": "#6b2f63",
+    "foil": "#ff9ac4",
     "palette": {
-      "paper": "#663624",
-      "paperDeep": "#502a1c",
-      "paperPale": "#f0e2d7",
-      "ink": "#f2e5db",
-      "inkSoft": "#d5b8a9",
-      "wall": "#663624",
-      "shelf": "#44261b",
+      "paper": "#582751",
+      "paperDeep": "#451e3f",
+      "paperPale": "#eadede",
+      "ink": "#ede2e1",
+      "inkSoft": "#c7adbc",
+      "wall": "#582751",
+      "shelf": "#402321",
       "shelfDark": "#1c0e0a",
-      "light": "#ebd6c2",
-      "fill": "#c29d8f"
+      "light": "#e4d1cb",
+      "fill": "#ae8da9"
     },
     "width": 0.98,
     "height": 1.5,
@@ -45,19 +45,19 @@ const SHELF_VISUALS = {
     "seed": 18
   },
   "sasaki": {
-    "color": "#9ab87b",
-    "foil": "#1f2a15",
+    "color": "#e0652f",
+    "foil": "#30292b",
     "palette": {
-      "paper": "#94b176",
-      "paperDeep": "#738a5c",
-      "paperPale": "#f1f1e1",
-      "ink": "#141512",
-      "inkSoft": "#363f2d",
-      "wall": "#94b176",
-      "shelf": "#463324",
+      "paper": "#703218",
+      "paperDeep": "#572713",
+      "paperPale": "#fbe5d7",
+      "ink": "#fbe8db",
+      "inkSoft": "#f3c1a8",
+      "wall": "#703218",
+      "shelf": "#4e291b",
       "shelfDark": "#1c0e0a",
-      "light": "#ede9cf",
-      "fill": "#c7d8b6"
+      "light": "#f9dac2",
+      "fill": "#eeaa8d"
     },
     "width": 0.98,
     "height": 1.5,
@@ -108,19 +108,19 @@ const SHELF_VISUALS = {
     "seed": 39
   },
   "shikaku": {
-    "color": "#9c8148",
-    "foil": "#1d1608",
+    "color": "#19131e",
+    "foil": "#e0386f",
     "palette": {
-      "paper": "#514325",
-      "paperDeep": "#3f341d",
-      "paperPale": "#f1e9da",
-      "ink": "#f3ebde",
-      "inkSoft": "#d9ccb1",
-      "wall": "#514325",
-      "shelf": "#462d1e",
+      "paper": "#141019",
+      "paperDeep": "#100c14",
+      "paperPale": "#dfdad4",
+      "ink": "#e3ded9",
+      "inkSoft": "#a8a2a1",
+      "wall": "#141019",
+      "shelf": "#361f19",
       "shelfDark": "#1c0e0a",
-      "light": "#eddfc6",
-      "fill": "#c9ba9a"
+      "light": "#d6cbbf",
+      "fill": "#807d83"
     },
     "width": 0.98,
     "height": 1.5,
@@ -129,19 +129,19 @@ const SHELF_VISUALS = {
     "seed": 46
   },
   "mermaid-rhapsody": {
-    "color": "#414773",
-    "foil": "#e8e19b",
+    "color": "#1a84c1",
+    "foil": "#ebf1b4",
     "palette": {
-      "paper": "#353a5e",
-      "paperDeep": "#292d49",
-      "paperPale": "#e4e1e0",
-      "ink": "#e8e5e3",
-      "inkSoft": "#b7b6c2",
-      "wall": "#353a5e",
-      "shelf": "#3b2623",
+      "paper": "#0e4768",
+      "paperDeep": "#0b3751",
+      "paperPale": "#dfe9eb",
+      "ink": "#e4ecec",
+      "inkSoft": "#a8cddf",
+      "wall": "#0e4768",
+      "shelf": "#362d2c",
       "shelfDark": "#1c0e0a",
-      "light": "#ddd5ce",
-      "fill": "#969ab2"
+      "light": "#d6e0dc",
+      "fill": "#81bbdd"
     },
     "width": 0.98,
     "height": 1.5,
@@ -192,19 +192,19 @@ const SHELF_VISUALS = {
     "seed": 67
   },
   "woke-up-as-a-girl": {
-    "color": "#a7a488",
-    "foil": "#23233b",
+    "color": "#c17243",
+    "foil": "#f6ecd0",
     "palette": {
-      "paper": "#a09d83",
-      "paperDeep": "#7d7a66",
-      "paperPale": "#f3eee3",
-      "ink": "#0b0b0b",
-      "inkSoft": "#34332c",
-      "wall": "#a09d83",
-      "shelf": "#473125",
+      "paper": "#643b23",
+      "paperDeep": "#4e2e1b",
+      "paperPale": "#f6e7da",
+      "ink": "#f8eadd",
+      "inkSoft": "#e7c6b0",
+      "wall": "#643b23",
+      "shelf": "#4a2b1d",
       "shelfDark": "#1c0e0a",
-      "light": "#efe6d2",
-      "fill": "#cfcdbe"
+      "light": "#f4ddc5",
+      "fill": "#ddb198"
     },
     "width": 0.98,
     "height": 1.5,
@@ -213,19 +213,19 @@ const SHELF_VISUALS = {
     "seed": 74
   },
   "sisters": {
-    "color": "#d9ce9f",
-    "foil": "#414773",
+    "color": "#4a4f55",
+    "foil": "#7fd3cf",
     "palette": {
-      "paper": "#d0c699",
-      "paperDeep": "#a29a77",
-      "paperPale": "#faf4e6",
-      "ink": "#24221d",
-      "inkSoft": "#555140",
-      "wall": "#d0c699",
-      "shelf": "#4d3628",
+      "paper": "#3d4146",
+      "paperDeep": "#303337",
+      "paperPale": "#e6e2dc",
+      "ink": "#e9e5df",
+      "inkSoft": "#bab9b6",
+      "wall": "#3d4146",
+      "shelf": "#3c271f",
       "shelfDark": "#1c0e0a",
-      "light": "#f8edd6",
-      "fill": "#eae4ca"
+      "light": "#ded6c9",
+      "fill": "#9b9ea2"
     },
     "width": 0.98,
     "height": 1.5,
@@ -318,19 +318,19 @@ const SHELF_VISUALS = {
     "seed": 109
   },
   "just-listen": {
-    "color": "#2b2d31",
-    "foil": "#e6e6e6",
+    "color": "#b9b39f",
+    "foil": "#1f2a2e",
     "palette": {
-      "paper": "#232528",
-      "paperDeep": "#1b1d1f",
-      "paperPale": "#e1ddd7",
-      "ink": "#e6e1db",
-      "inkSoft": "#aeaca9",
-      "wall": "#232528",
-      "shelf": "#38221b",
+      "paper": "#b2ac99",
+      "paperDeep": "#8b8677",
+      "paperPale": "#f5f0e6",
+      "ink": "#1c1c1a",
+      "inkSoft": "#3f3d37",
+      "wall": "#b2ac99",
+      "shelf": "#493328",
       "shelfDark": "#1c0e0a",
-      "light": "#d9d0c2",
-      "fill": "#8a8c8e"
+      "light": "#f2e8d6",
+      "fill": "#d8d5ca"
     },
     "width": 0.96,
     "height": 1.5,
