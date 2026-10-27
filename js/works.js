@@ -273,7 +273,7 @@ const WORKS = [
     jp: "シカク",
     type: "oneshot",
     year: 2014,
-    blog: null,
+    blog: "https://dans-vsa.github.io/shikaku-fanblog/",
     venue: { id: "Jump SQ.19", en: "Jump SQ.19" },
     size: { id: "One-shot · koleksi 17-21", en: "One-shot · in 17-21" },
     tagline: { id: "Pembunuh bayaran dan vampir yang ingin mati.", en: "An assassin and a vampire who wants to die." },
