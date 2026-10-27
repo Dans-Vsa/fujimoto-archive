@@ -252,7 +252,7 @@ const WORKS = [
     jp: "人魚ラプソディ",
     type: "oneshot",
     year: 2014,
-    blog: null,
+    blog: "https://dans-vsa.github.io/mermaid-rhapsody-fanblog/",
     venue: { id: "Jump SQ.19", en: "Jump SQ.19" },
     size: { id: "One-shot · koleksi 22-26", en: "One-shot · in 22-26" },
     tagline: { id: "Piano di dasar laut.", en: "A piano at the bottom of the sea." },

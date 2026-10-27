@@ -26,6 +26,7 @@ Linked blogs:
 - A Couple Clucking Chickens (Niwatori) → https://dans-vsa.github.io/niwatori-fanblog/
 - Sasaki Stopped a Bullet → https://dans-vsa.github.io/sasaki-fanblog/
 - Shikaku → https://dans-vsa.github.io/shikaku-fanblog/
+- Mermaid Rhapsody → https://dans-vsa.github.io/mermaid-rhapsody-fanblog/
 - Love is Blind → https://dans-vsa.github.io/love-is-blind-fanwiki/
 
 Covers live in `assets/covers/` (WebP, official Shueisha art via the Chainsaw Man Fandom Wiki; four copied from the CSM blog's assets). One-shots use colour key visuals of the *Tatsuki Fujimoto 17-26* anime (copied from the 17-26 fan blog's assets; Nayuta keeps its colour magazine page, Just Listen uses a crop of its Shōnen Jump+ key art); the `col` field notes which collection volume they appear in. Only the two unpublished contest manuscripts have no image and render as a manuscript page. Copy rule: no em/en dashes in visible text.
