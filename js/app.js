@@ -5,7 +5,9 @@
     id: {
       skip: "Lewati ke konten",
       "nav.works": "Karya", "nav.oneshots": "One-shot", "nav.timeline": "Linimasa",
-      "nav.adaptations": "Adaptasi", "nav.awards": "Penghargaan", "nav.back": "Semua karya",
+      "nav.adaptations": "Adaptasi", "nav.awards": "Penghargaan", "nav.back": "Semua karya", "nav.arsip": "Arsip lengkap",
+      "arsip.back": "← Kembali ke rak", "arsip.title": "Arsip lengkap",
+      "arsip.dek": "Profil, cerpen, linimasa, adaptasi, dan penghargaan Tatsuki Fujimoto.",
       "hero.dek": "Semua karyanya di satu rak. Arahkan kursor ke punggung buku.",
       "hero.dekTouch": "Semua karyanya di satu rak. Ketuk punggung buku.",
       "lamp.on": "Nyalakan lampu", "lamp.off": "Matikan lampu",
@@ -39,7 +41,9 @@
     en: {
       skip: "Skip to content",
       "nav.works": "Works", "nav.oneshots": "One-shots", "nav.timeline": "Timeline",
-      "nav.adaptations": "Adaptations", "nav.awards": "Awards", "nav.back": "All works",
+      "nav.adaptations": "Adaptations", "nav.awards": "Awards", "nav.back": "All works", "nav.arsip": "Full archive",
+      "arsip.back": "← Back to the shelf", "arsip.title": "Full archive",
+      "arsip.dek": "Profile, short stories, timeline, adaptations, and awards of Tatsuki Fujimoto.",
       "hero.dek": "His whole body of work on one shelf. Hover over a spine.",
       "hero.dekTouch": "His whole body of work on one shelf. Tap a spine.",
       "lamp.on": "Turn the lights on", "lamp.off": "Turn the lights off",
@@ -313,7 +317,7 @@
   /* ── Hub ─────────────────────────────────────── */
 
   function renderHub() {
-    renderLibrary();
+    if ($("#shelves")) renderLibrary();
 
     $("#bio").textContent = L(PROFILE.bio);
     $("#profile-facts").innerHTML = PROFILE.facts.map((f) => `<div><dt>${L(f.k)}</dt><dd>${L(f.v)}</dd></div>`).join("");
@@ -393,7 +397,7 @@
     const i = byYear.findIndex((w) => w.id === id);
     const main = $(".detail");
     if (i < 0) {
-      main.innerHTML = `<div class="container section"><p class="lede">${t("notFound")}</p><a class="btn btn--ink" href="index.html#works">${t("back")}</a></div>`;
+      main.innerHTML = `<div class="container section"><p class="lede">${t("notFound")}</p><a class="btn btn--ink" href="index.html">${t("back")}</a></div>`;
       return;
     }
     const w = byYear[i], prev = byYear[i - 1], next = byYear[i + 1];
@@ -442,7 +446,7 @@
       if (typeof v === "string") el.textContent = v;
     });
     document.querySelectorAll(".lang__btn").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
-    if ($("#shelves")) renderHub(); else renderDetail();
+    if ($("#bio")) renderHub(); else renderDetail();
   }
 
   document.addEventListener("click", (e) => {
@@ -451,5 +455,6 @@
   });
 
   applyLang();
-  if ($("#shelves")) { bindLibrary(); bindReveal(); }
+  if ($("#shelves")) bindLibrary();
+  if ($("#bio")) bindReveal();
 })();

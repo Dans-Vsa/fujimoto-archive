@@ -324,3 +324,9 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(255,25
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* ── Arsip page head ──────────────────────────── */
+.arsip-head { padding-top: 56px; padding-bottom: 24px; }
+.arsip-head__back { margin: 0 0 20px; font-size: 14px; }
+.arsip-head__back a { color: var(--body); text-decoration: none; }
+.arsip-head__back a:hover { color: var(--ink); }
